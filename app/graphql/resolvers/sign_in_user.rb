@@ -3,7 +3,7 @@ class Resolvers::SignInUser < GraphQL::Function
 
   type Types::SignInPayloadType
 
-  def call(_obj, args, ctx)
+  def call(_obj, args, _ctx)
     input = args[:credentials]
 
     return unless input
