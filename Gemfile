@@ -58,7 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Graphql Integration
 gem 'graphql'
 # Graphiql App
-gem "graphiql-rails"
+gem 'graphiql-rails', group: :development
 # Json Web Token
 gem 'jwt'
-gem 'graphiql-rails', group: :development

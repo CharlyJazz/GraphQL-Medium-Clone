@@ -13,21 +13,21 @@
 ActiveRecord::Schema.define(version: 20180119175546) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "users_id"
-    t.integer "posts_id"
+    t.integer "user_id"
+    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["posts_id"], name: "index_bookmarks_on_posts_id"
-    t.index ["users_id"], name: "index_bookmarks_on_users_id"
+    t.index ["post_id"], name: "index_bookmarks_on_post_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "claps", force: :cascade do |t|
-    t.integer "posts_id"
-    t.integer "users_id"
+    t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["posts_id"], name: "index_claps_on_posts_id"
-    t.index ["users_id"], name: "index_claps_on_users_id"
+    t.index ["post_id"], name: "index_claps_on_post_id"
+    t.index ["user_id"], name: "index_claps_on_user_id"
   end
 
   create_table "collections", force: :cascade do |t|
@@ -49,12 +49,19 @@ ActiveRecord::Schema.define(version: 20180119175546) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
-    t.integer "posts_id"
-    t.integer "users_id"
+    t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["posts_id"], name: "index_comments_on_posts_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "post_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "post_id", null: false
+    t.index ["post_id"], name: "index_post_tags_on_post_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -65,13 +72,6 @@ ActiveRecord::Schema.define(version: 20180119175546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "posts_tags", id: false, force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "post_id", null: false
-    t.index ["post_id"], name: "index_posts_tags_on_post_id"
-    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|

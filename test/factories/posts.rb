@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :post do
-    title "MyString"
+    association :user, factory: :user
+    
+    title "MyText"
     body "MyText"
-    user nil
+    picture "MyText"
   end
 end

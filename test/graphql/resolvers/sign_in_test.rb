@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Resolvers::SignInUserTest < ActiveSupport::TestCase
   setup do
-    create(:user)
+    @user = create(:user)
   end
 
   def perform(args = {})
@@ -12,15 +12,15 @@ class Resolvers::SignInUserTest < ActiveSupport::TestCase
   test 'sign in user' do
     signin = perform(
       credentials: {
-        email: 'email@example.com',
-        password: '[omitted]'
+        email: @user.email,
+        password: @user.password
       }
     )
 
     assert signin.token.blank? == false
     assert AuthToken.verify(signin.token).kind_of? User
-    assert_equal signin.user.id, 1
-    assert_equal signin.user.name, 'name'
-    assert_equal signin.user.email, 'email@example.com'
+    assert_equal signin.user.id, @user.id
+    assert_equal signin.user.name, @user.name
+    assert_equal signin.user.email, @user.email
   end
 end
