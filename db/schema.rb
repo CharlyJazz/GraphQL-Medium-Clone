@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180119175546) do
   end
 
   create_table "claps", force: :cascade do |t|
+    t.integer "total", default: 0
     t.integer "post_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
