@@ -24,3 +24,5 @@
 /public/packs
 /public/packs-test
 /node_modules
+/client/node_modules
+/public/*
