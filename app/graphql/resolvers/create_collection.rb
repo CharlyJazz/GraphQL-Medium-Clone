@@ -1,0 +1,1 @@
+# Se puede crear la collection vacia o con Posts
