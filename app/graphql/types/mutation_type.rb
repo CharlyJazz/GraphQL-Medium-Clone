@@ -7,4 +7,5 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :createComment, function: Resolvers::CreateComment.new
   field :createBookmark, function: Resolvers::CreateBookmark.new
   field :createClap, function: Resolvers::CreateClap.new
+  field :createCollection, function: Resolvers::CreateCollection.new
 end
