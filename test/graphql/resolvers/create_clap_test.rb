@@ -16,8 +16,8 @@ class Resolvers::CreateClapTest < ActiveSupport::TestCase
     )
 
     assert_equal @post.claps.all.length, 1
-    assert_equal clap.totalClaps, 4
-    assert_equal clap.totalClaps, @post.claps.sum(:total)
+    assert_equal clap.total, 4
+    assert_equal clap.total, @post.claps.sum(:total)
 
     clap = perform(
       postId: "1",
@@ -25,8 +25,8 @@ class Resolvers::CreateClapTest < ActiveSupport::TestCase
     )
 
     assert_equal @post.claps.all.length, 1
-    assert_equal clap.totalClaps, 8
-    assert_equal clap.totalClaps, @post.claps.sum(:total)
+    assert_equal clap.total, 8
+    assert_equal clap.total, @post.claps.sum(:total)
 
     user_new = create(:user)
     
@@ -38,7 +38,8 @@ class Resolvers::CreateClapTest < ActiveSupport::TestCase
     })
 
     assert_equal @post.claps.all.length, 2
-    assert_equal clap.totalClaps, 10
-    assert_equal clap.totalClaps, @post.claps.sum(:total)
+    assert_equal @post.claps.all.sum(:total), 10    
+    assert_equal clap.total, 2
+    assert_equal clap.total, 2
   end
 end

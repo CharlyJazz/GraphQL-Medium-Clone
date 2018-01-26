@@ -2,7 +2,6 @@ class Resolvers::CreateCollection < GraphQL::Function
   argument :title, !types.String
   argument :description, !types.String
   argument :picture, !types.String
-  
   argument :postsId, types[types.Int]
 
   type Types::CollectionType

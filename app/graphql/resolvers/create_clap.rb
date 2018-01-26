@@ -10,23 +10,29 @@ class Resolvers::CreateClap < GraphQL::Function
       raise GraphQL::ExecutionError.new("Authentication required")
     end
 
-    # Search Post 
-    post = Post.find_by(id: args[:postId] )
-    # Check if current_user have claps in the post
-    check_if_user_have_claps = post.claps.where(:user_id => ctx[:current_user].id).first
+    # Search Post or rescue
+    begin
+      post = Post.find(args[:postId])
+    rescue ActiveRecord::RecordNotFound => e
+      return GraphQL::ExecutionError.new("Post with the id #{args[:postId]} not found")
+    end
     
-    if check_if_user_have_claps.blank?
-      post.claps << Clap.new(
+    # Check if current_user have claps in the post
+    clap = post.claps.where(:user_id => ctx[:current_user].id).first
+    
+    if clap.blank?
+      clap = Clap.new(
         user: ctx[:current_user],
         total: args[:totalClaps]
       )
+      post.claps << clap
       post.save
     else
-      check_if_user_have_claps.total += args[:totalClaps]
-      check_if_user_have_claps.save
+      clap.total += args[:totalClaps]
+      clap.save
     end
 
-    OpenStruct.new(totalClaps: post.claps.all.sum(:total))
+    clap
     
   rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
