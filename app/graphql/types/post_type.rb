@@ -9,4 +9,6 @@ Types::PostType = GraphQL::ObjectType.define do
 
   field :postedBy, -> { Types::UserType }, property: :user
   field :claps, -> { !types[Types::ClapType] }
+  field :tags, -> { !types[Types::TagType] }
+  field :collections, -> { !types[Types::CollectionType] }
 end
