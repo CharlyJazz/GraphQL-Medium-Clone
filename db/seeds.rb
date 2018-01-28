@@ -4,6 +4,15 @@ posts_length = 10
 
 collections_length = 4
 
+tag_length = 0
+
+tag_file = YAML.load_file(Dir['tmp'][0] + '/tag.yml')
+
+tag_file['tags'].each do |tag|
+  Tag.create(name: tag)
+  tag_length += 1
+end
+
 user_list.each do |name| 
   User.create(name: name, email: "#{name.downcase}@gmail.com", password: "1234")
 end
@@ -15,6 +24,10 @@ posts_length.times do |n|
     picture: "Image#{n.to_s}.png",
     user: User.find(rand(1..user_list.length))
   )
+
+  rand(1..tag_length).times do |n| 
+    post.tags << Tag.find(n + 1)
+  end
 
   rand(1..user_list.length).times do |n| 
     Comment.create(

@@ -3,6 +3,8 @@ Types::QueryType = GraphQL::ObjectType.new.tap do |root_type|
   root_type.description = "The query root of this schema"
   root_type.interfaces = []
   root_type.fields = Util::FieldCombiner.combine([
+    Types::SearchQueryType,
+
     Util::FieldCreatorSearchRecord.new([
       [Post, Types::PostType],
       [User, Types::UserType],

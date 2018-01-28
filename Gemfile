@@ -38,3 +38,7 @@ gem 'graphiql-rails', group: :development
 gem 'jwt'
 # User password secure
 gem 'bcrypt', '~> 3.1.7'
+# Search Object
+gem 'search_object', '1.2.0'
+# Search Object with Graphql
+gem 'search_object_graphql', '0.1'
