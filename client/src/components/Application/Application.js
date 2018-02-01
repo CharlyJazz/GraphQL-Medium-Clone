@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Layout from '../../hoc/Layout/Layout';
-import CustomAnimatedSwitch from '../../hoc/CustomAnimatedSwitch/CustomAnimatedSwitch';
+// import CustomAnimatedSwitch from '../../hoc/CustomAnimatedSwitch/CustomAnimatedSwitch';
 
 import HomeContainer from '../../containers/HomeContainer';
 import AuthContainer from '../../containers/AuthContainer';
@@ -16,15 +16,14 @@ class Application extends Component {
   render() {
     return (
       <Layout> 
-        <CustomAnimatedSwitch>
+        {/*<CustomAnimatedSwitch>*/}
           <Route path="/"            exact component={HomeContainer}        />
           <Route path="/auth"        exact component={AuthContainer}        />
           <Route path="/posts"       exact component={PostsContainer}       />
           <Route path="/search"      exact component={SearchContainer}      />
           <Route path="/profile"     exact component={ProfileContainer}     />
           <Route path="/collections" exact component={CollectionsContainer} />
-          <Redirect to="/" />
-        </CustomAnimatedSwitch>
+        {/*</CustomAnimatedSwitch> */}
       </Layout>
     );
   }

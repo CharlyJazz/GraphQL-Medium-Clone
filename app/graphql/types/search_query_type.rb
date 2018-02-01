@@ -3,5 +3,5 @@ Types::SearchQueryType = GraphQL::ObjectType.define do
   field :allCollections, function: Resolvers::SearchCollections
   field :allUsers, function: Resolvers::SearchUsers
   field :allTags, function: Resolvers::SearchTags
-  field :allTopics, function: Resolvers::SearchTopics
+  field :allTopics, function: Resolvers::SearchTopics.new
 end
