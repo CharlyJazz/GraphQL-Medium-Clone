@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :post do
     association :user, factory: :user
+    association :topic, factory: :topic
     
-    title "MyText"
-    body "MyText"
-    picture "MyText"
+    sequence(:title) { |n| "Title #{n}" }
+    sequence(:body) { |n| "Body #{n}" }    
+    sequence(:picture) { |n| "Picture #{n}" }    
   end
 end

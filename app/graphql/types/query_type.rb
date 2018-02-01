@@ -10,7 +10,8 @@ Types::QueryType = GraphQL::ObjectType.new.tap do |root_type|
       [User, Types::UserType],
       [Collection, Types::CollectionType],
       [Bookmark, Types::BookmarkType],
-      [Comment, Types::CommentType]
+      [Comment, Types::CommentType],
+      [Topic, Types::TopicType],
     ]).create_fields
   ])
 end

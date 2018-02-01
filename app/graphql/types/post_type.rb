@@ -8,6 +8,7 @@ Types::PostType = GraphQL::ObjectType.define do
   field :picture, !types.String
 
   field :postedBy, -> { Types::UserType }, property: :user
+  field :topic, -> { Types::TopicType }
   field :claps, -> { !types[Types::ClapType] }
   field :comments, -> { !types[Types::CommentType] }
   field :tags, -> { !types[Types::TagType] }

@@ -2,7 +2,8 @@ class Resolvers::CreatePost < GraphQL::Function
   argument :title, !types.String
   argument :body, !types.String
   argument :picture, !types.String
-  argument :tagsId, types[types.Int]
+  argument :topicId, !types.ID
+  argument :tagsId, types[types.ID]
 
   type Types::PostType
 
@@ -16,7 +17,8 @@ class Resolvers::CreatePost < GraphQL::Function
       body: args[:body],
       title: args[:title],
       picture: args[:picture],
-      user: ctx[:current_user]
+      topic: Topic.find(args[:topicId]),
+      user: ctx[:current_user],
     )
 
     !args[:tagsId].blank? && args[:tagsId].each {|tagId|

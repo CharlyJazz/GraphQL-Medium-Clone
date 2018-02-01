@@ -2,6 +2,8 @@ require 'test_helper'
 
 class Resolvers::CreatePostTest < ActiveSupport::TestCase
   setup do
+    @topic = create(:topic)
+
     create(:user)
   end
 
@@ -13,7 +15,8 @@ class Resolvers::CreatePostTest < ActiveSupport::TestCase
     post = perform(
       title: "Post Title",
       body: "Post Body",
-      picture: "post.png"
+      picture: "post.png",
+      topicId: @topic.id
     )
 
     assert post.persisted?
@@ -31,7 +34,8 @@ class Resolvers::CreatePostTest < ActiveSupport::TestCase
       title: "Post Title",
       body: "Post Body",
       picture: "post.png",
-      tagsId: tags.map {|tag| tag.id}
+      tagsId: tags.map {|tag| tag.id},
+      topicId: @topic.id
     )
 
     assert post.persisted?

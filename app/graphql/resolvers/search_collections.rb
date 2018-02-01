@@ -28,7 +28,7 @@ class Resolvers::SearchCollections
       # add like SQL conditions
       scope = Post.all
       scope = scope.where('title LIKE ?', "%#{value['title_contains']}%") if value['title_contains']
-      scope = scope.where('description LIKE ?', "%#{value['description_contains']}%") if value['body_contains']
+      scope = scope.where('description LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
   
       branches << scope
   
