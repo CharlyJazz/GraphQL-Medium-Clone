@@ -20,6 +20,8 @@
 
 /node_modules
 /yarn-error.log
+yarn.lock
+package-lock.json
 
 .byebug_history
 /public/packs
