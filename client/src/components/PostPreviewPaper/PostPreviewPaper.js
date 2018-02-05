@@ -3,9 +3,18 @@ import Paper from "material-ui/Paper/Paper";
 import PropTypes from 'prop-types';
 import ImgResponsive from '../UI/ImageResponsive/ImageResponsive';
 import PostPreviewFooter from './PostPreviewFooter/PostPreviewFooter';
+import Typography from 'material-ui/Typography/Typography';
+import Anchor from '../UI/Anchor/Anchor';
+
+import './PostPreviewPaper.css';
+
 
 const PostPreviewPaper = props => {
-  const stylesArray = [props.classesPaper && props.classesPaper, 'DontUseShadow'];
+  const stylesArray = [
+    props.classesPaper && props.classesPaper,
+    'DontUseShadow',
+    'PostPreviewPaper'
+  ];
 
   let divTextStyle = {'textAlign': 'center'};
 
@@ -17,13 +26,13 @@ const PostPreviewPaper = props => {
 
   let divText = (
     <div style={divTextStyle}>
-      <h3>
+      <Typography type="title" paragraph={true}>
         I Got Chipped: A Dispatch From The Frontier Of Wearable Tech
-      </h3>
+      </Typography>
       {props.avatarObject === undefined && (
-          <a>
-            Carlos Author Azuaje | Feb 4
-          </a>  
+        <Typography type="subheading" color="textSecondary">
+          <Anchor children={props.postedBy}/>
+        </Typography>
         )
       }
     </div>
@@ -34,16 +43,17 @@ const PostPreviewPaper = props => {
       
       {props.textFrom === 'top' ? divText : null}
       
-      <figure>
+      <div className='BoxImg'>
         <ImgResponsive img={props.imgUrl} alt={props.imgAlt}/>
-      </figure>
+      </div>
 
       {props.textFrom === 'bottom' ? divText : null}
 
       {props.avatarObject !== undefined && (
         <PostPreviewFooter
           imgAlt={props.avatarObject['imgAlt']}
-          imgUrl={props.avatarObject['imgUrl']}/>
+          imgUrl={props.avatarObject['imgUrl']}
+          postedBy={props.postedBy}/>
       )}
     </Paper>
   )
@@ -59,6 +69,7 @@ PostPreviewPaper.defaultProps = {
 PostPreviewPaper.propTypes = {
   textAlign: PropTypes.string,
   textFrom: PropTypes.string,
+  postedBy: PropTypes.string.isRequired,
   avatarObject: PropTypes.object
 }
 

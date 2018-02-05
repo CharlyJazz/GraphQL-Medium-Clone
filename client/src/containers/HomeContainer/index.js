@@ -35,7 +35,8 @@ class HomeContainer extends Component {
                   avatarObject={{
                     imgUrl: 'https://cdn-images-1.medium.com/fit/c/60/60/1*e7o4kbk8ofT6eKaLrO0jaw.png',
                     imgAlt: 'Charl Namex',
-                  }}/>
+                  }}
+                  postedBy='Carl Pepazo'/>
               </Grid>
             </Grid>
           </div>
@@ -47,25 +48,29 @@ class HomeContainer extends Component {
                 <PostPreviewPaper 
                   classesPaper={classes.paper}
                   textFrom="bottom"
-                  textAlign="left"/>
+                  textAlign="left"
+                  postedBy='Sam Beterson'/>
               </Grid>
               <Grid item xs={6}>
                 <PostPreviewPaper
                   classesPaper={classes.paper}
                   textFrom="bottom"
-                  textAlign="left"/>
+                  textAlign="left"
+                  postedBy='Max'/>
               </Grid>
               <Grid item xs={6}>
                 <PostPreviewPaper 
                   classesPaper={classes.paper}
                   textFrom="bottom"
-                  textAlign="left"/>
+                  textAlign="left"
+                  postedBy='Leorena'/>
               </Grid>
               <Grid item xs={6}>
                 <PostPreviewPaper
                   classesPaper={classes.paper}
                   textFrom="bottom"
-                  textAlign="left"/>
+                  textAlign="left"
+                  postedBy='Richard'/>
               </Grid>
             </Grid>
           </div>
