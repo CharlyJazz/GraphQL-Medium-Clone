@@ -54,7 +54,7 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="default" className="DontUseShadow">
           <Toolbar>
             <Typography type="title" color="inherit" className={classes.flex}>
               AppStories

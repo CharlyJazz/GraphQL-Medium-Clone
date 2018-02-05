@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'normalize.css';
-
 import App from './components/Application/Application';
 
 import { ApolloProvider } from 'react-apollo'

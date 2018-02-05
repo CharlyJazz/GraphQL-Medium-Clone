@@ -41,7 +41,7 @@ class MenuTopics extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="default" className="DontUseShadow">
           <Tabs
             value={value}
             onChange={this.handleChange}
@@ -64,19 +64,6 @@ class MenuTopics extends Component {
             <Tab label="Item 12" />
           </Tabs>
         </AppBar>
-        {value === 0  && <TabContainer>Item 0  </TabContainer>}
-        {value === 1  && <TabContainer>Item 1  </TabContainer>}
-        {value === 2  && <TabContainer>Item 2  </TabContainer>}
-        {value === 3  && <TabContainer>Item 3  </TabContainer>}
-        {value === 4  && <TabContainer>Item 4  </TabContainer>}
-        {value === 5  && <TabContainer>Item 5  </TabContainer>}
-        {value === 6  && <TabContainer>Item 6  </TabContainer>}
-        {value === 7  && <TabContainer>Item 7  </TabContainer>}
-        {value === 8  && <TabContainer>Item 8  </TabContainer>}
-        {value === 9  && <TabContainer>Item 9  </TabContainer>}
-        {value === 10 && <TabContainer>Item 10 </TabContainer>}
-        {value === 11 && <TabContainer>Item 11 </TabContainer>}
-        {value === 12 && <TabContainer>Item 12 </TabContainer>}
       </div>
     );
   }
