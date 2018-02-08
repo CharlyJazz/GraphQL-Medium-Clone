@@ -2,31 +2,110 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid/Grid';
 import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics';
 import Typography from 'material-ui/Typography/Typography';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
+import { withStyles } from 'material-ui/styles';
+import PostsContainer from './postsContainer';
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 30,
+  },
+  paper: {
+    padding: 16,
+    color: theme.palette.text.secondary,
+  }
+});
 
 class TopicsContainer extends Component {
   render() {
+
     let name = this.props.match.params.name || false;
+    let divTitle = null;
+    let topicFiltered = null;
+
+    const { classes } = this.props;
+
+
+    if (!this.props.data.loading) {
+      topicFiltered = this.props.data.allTopics.find((n) => {
+        return n['name'] === name
+      })
+    }
+
+    if (name) {
+      divTitle = (
+        <Grid item xs={12}>
+          <Typography type="display3" gutterBottom paragraph={true}>
+            {name.replace(/\b\w/g, l => l.toUpperCase())}
+          </Typography>
+          {this.props.data.loading === false &&
+          <Typography type="display1" gutterBottom paragraph={true}>
+            {topicFiltered.description}
+          </Typography>
+          }
+        </Grid>
+      )
+    }
+    else {
+      divTitle = (
+        <Grid item xs={12}>
+          <MenuTopics/>
+        </Grid>
+      )
+    }
 
     return (
       <React.Fragment>
-        { name
-          ? (
-            <Grid item xs={12}>
-              <Typography variant="display4" gutterBottom paragraph={true}>
-                {name.replace(/\b\w/g, l => l.toUpperCase())}
-              </Typography>
-            </Grid>
-            )
-          : (
-            <Grid item xs={12}>
-              <MenuTopics/>
-            </Grid>
-            )
-        }
+        { divTitle }
+        <div className={classes.root}>
+          <Grid>
+            {this.props.data.loading
+              ? 'Loading'
+              : name 
+                ? <PostsContainer
+                    classes={this.props.classes}
+                    posts={topicFiltered.posts}/>
+                : (
+                  this.props.data.allTopics.map( topic => {
+                    return (
+                      <PostsContainer 
+                        key={topic.id}
+                        classes={this.props.classes}
+                        posts={topic.posts}
+                        topicName={topic.name}/>
+                    )
+                  })
+                )
+            }
+          </Grid>
+        </div>
       </React.Fragment>
     )
   }
 }
 
-export default TopicsContainer;
+const query = gql`
+  query {
+    allTopics {
+      id
+      name
+      description
+      posts {
+        id
+        title
+        body
+        postedBy {
+          id
+          name
+          picture
+        }
+      }
+    }
+  }
+`
+
+export default graphql(query)(
+  withStyles(styles)(TopicsContainer)
+);
