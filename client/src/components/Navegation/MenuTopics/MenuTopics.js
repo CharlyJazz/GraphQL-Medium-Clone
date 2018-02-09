@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
+import AppBar from 'material-ui/AppBar';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const styles = theme => ({
   root: {
@@ -35,48 +26,57 @@ class MenuTopics extends Component {
     this.setState({ value });
   };
 
+  handleClickHome = () => {
+    /*
+    * Redirect to /
+    * */
+    this.timeOut && clearTimeout(this.timeOut); // Prevent multiple redirect
+
+    this.props.history.push('/')
+  }
+
+  handleClickTopic = (IdTopic) =>{
+    /*
+    * Redirect to /topic/:topicName
+    * */
+    this.timeOut && clearTimeout(this.timeOut); // Prevent multiple redirect
+
+    this.timeOut = setTimeout(() => {
+      this.props.history.push(`/topics/${this.props.data.allTopics.find((n) => {
+        return n['id'] === IdTopic
+      })['name']}`)
+    }, 600)
+  }
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            scrollable
-            scrollButtons="auto"
-          >
-            <Tab label="Item 1" />
-            <Tab label="Item 2" />
-            <Tab label="Item 3" />
-            <Tab label="Item 4" />
-            <Tab label="Item 5" />
-            <Tab label="Item 6" />
-            <Tab label="Item 7" />
-            <Tab label="Item 8" />
-            <Tab label="Item 9" />
-            <Tab label="Item 10" />
-            <Tab label="Item 11" />
-            <Tab label="Item 12" />
-          </Tabs>
-        </AppBar>
-        {value === 0  && <TabContainer>Item 0  </TabContainer>}
-        {value === 1  && <TabContainer>Item 1  </TabContainer>}
-        {value === 2  && <TabContainer>Item 2  </TabContainer>}
-        {value === 3  && <TabContainer>Item 3  </TabContainer>}
-        {value === 4  && <TabContainer>Item 4  </TabContainer>}
-        {value === 5  && <TabContainer>Item 5  </TabContainer>}
-        {value === 6  && <TabContainer>Item 6  </TabContainer>}
-        {value === 7  && <TabContainer>Item 7  </TabContainer>}
-        {value === 8  && <TabContainer>Item 8  </TabContainer>}
-        {value === 9  && <TabContainer>Item 9  </TabContainer>}
-        {value === 10 && <TabContainer>Item 10 </TabContainer>}
-        {value === 11 && <TabContainer>Item 11 </TabContainer>}
-        {value === 12 && <TabContainer>Item 12 </TabContainer>}
+        {this.props.data.loading
+          ? 'Loading'
+          : (
+            <AppBar position="static" color="default" className="DontUseShadow">
+              <Tabs
+                value={value}
+                onChange={this.handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                scrollable
+                scrollButtons="auto">
+
+                <Tab label="Home" onClick={this.handleClickHome}/>
+
+                { this.props.data.allTopics.map( topic => (
+                  <Tab key={topic.id} label={topic.name} onClick={this.handleClickTopic.bind(null, topic.id)}/>
+                ))}
+
+              </Tabs>
+            </AppBar>
+          )
+        }
+        
       </div>
     );
   }
@@ -86,4 +86,18 @@ MenuTopics.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MenuTopics);
+// Search the Topics
+const query = gql`
+  query {
+    allTopics {
+      id
+      name
+    }
+  }
+`
+
+export default graphql(query)(
+  withRouter(
+    withStyles(styles)(MenuTopics)
+  )
+);

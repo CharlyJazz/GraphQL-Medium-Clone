@@ -1,6 +1,6 @@
 user_list = %w(Bart Kevin Max Rafael Charly Megan)
 
-posts_length = 10
+posts_length = 80
 
 collections_length = 4
 

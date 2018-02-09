@@ -1,0 +1,33 @@
+.PostPreviewFooter {
+  flex: 0 0 auto;
+  display: flex;
+}
+  
+.PostPreviewFooter > .MuiAvatar-root-220 {
+  flex: 0 0 auto;
+}
+
+.PostPreviewFooter > .UserBox {
+  flex: 1 1 auto;
+  border-right: 1px solid rgba(0,0,0,.1);
+}
+
+.PostPreviewFooter > .UserBox > h3 {
+  line-height: 40px;
+  margin-left: 20px;
+}
+
+.PostPreviewFooter > .BookmarkBox {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.PostPreviewFooter > .BookmarkBox > div > svg {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.PostPreviewFooter > .BookmarkBox > div > svg:hover {
+  fill: black
+}
