@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { withStyles } from 'material-ui/styles';
 import PostsContainer from './postsContainer';
+import PostLoading from './postsLoading';
 
 const styles = theme => ({
   root: {
@@ -60,26 +61,24 @@ class TopicsContainer extends Component {
       <React.Fragment>
         { divTitle }
         <div className={classes.root}>
-          <Grid>
-            {this.props.data.loading
-              ? 'Loading'
-              : name 
-                ? <PostsContainer
-                    classes={this.props.classes}
-                    posts={topicFiltered.posts}/>
-                : (
-                  this.props.data.allTopics.map( topic => {
-                    return (
-                      <PostsContainer 
-                        key={topic.id}
-                        classes={this.props.classes}
-                        posts={topic.posts}
-                        topicName={topic.name}/>
-                    )
-                  })
-                )
+          {this.props.data.loading
+            ? <PostLoading/>
+            : name 
+              ? <PostsContainer
+                  classes={this.props.classes}
+                  posts={topicFiltered.posts}/>
+              : (
+                this.props.data.allTopics.map( topic => {
+                  return (
+                    <PostsContainer 
+                      key={topic.id}
+                      classes={this.props.classes}
+                      posts={topic.posts}
+                      topicName={topic.name}/>
+                  )
+                })
+              )
             }
-          </Grid>
         </div>
       </React.Fragment>
     )

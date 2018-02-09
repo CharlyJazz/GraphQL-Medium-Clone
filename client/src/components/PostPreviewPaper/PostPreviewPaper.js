@@ -27,7 +27,7 @@ const PostPreviewPaper = props => {
   let divText = (
     <div style={divTextStyle}>
       <Typography type="title" paragraph={true}>
-        I Got Chipped: A Dispatch From The Frontier Of Wearable Tech
+        {props.title}
       </Typography>
       {props.avatarObject === undefined && (
         <Typography type="subheading" color="textSecondary">
@@ -70,7 +70,9 @@ PostPreviewPaper.propTypes = {
   textAlign: PropTypes.string,
   textFrom: PropTypes.string,
   postedBy: PropTypes.string.isRequired,
-  avatarObject: PropTypes.object
+  avatarObject: PropTypes.object,
+  title: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired
 }
 
 export default PostPreviewPaper;

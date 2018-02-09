@@ -27,6 +27,8 @@ const postsContainer = props =>  {
             textFrom="bottom"
             textAlign="left"
             postedBy={post.postedBy.name}
+            title={post.title}
+            postId={post.id}
             avatarObject={{
               imgUrl: 'https://cdn-images-1.medium.com/max/427/1*AUdzgoLMR_28CgeX_YTzXA.png',
               imgAlt: `Picture of ${post.postedBy.name}`
@@ -39,7 +41,7 @@ const postsContainer = props =>  {
   return (
     <Grid container>
       { title && title }        
-      { posts }
+      { posts}
     </Grid>
   )
 }
