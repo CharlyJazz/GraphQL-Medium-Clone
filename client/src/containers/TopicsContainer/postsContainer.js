@@ -38,12 +38,12 @@ const postsContainer = props =>  {
     })
   }
 
-  return (
+  return props.posts.length > 0 ? (
     <Grid container>
       { title && title }        
-      { posts}
+      { posts }
     </Grid>
-  )
+  ) : null
 }
 
 postsContainer.propTypes = {

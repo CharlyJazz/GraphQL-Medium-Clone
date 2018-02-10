@@ -32,11 +32,13 @@ class HomeContainer extends Component {
                 <PostPreviewPaper 
                   classesPaper={classes.paper}
                   textAlign="left"
+                  postedBy='Carl Pepazo'
+                  title={'The most cool title in tha world'}
+                  postId={"1"}
                   avatarObject={{
                     imgUrl: 'https://cdn-images-1.medium.com/fit/c/60/60/1*e7o4kbk8ofT6eKaLrO0jaw.png',
                     imgAlt: 'Charl Namex',
-                  }}
-                  postedBy='Carl Pepazo'/>
+                  }}/>
               </Grid>
             </Grid>
           </div>
@@ -49,6 +51,8 @@ class HomeContainer extends Component {
                   classesPaper={classes.paper}
                   textFrom="bottom"
                   textAlign="left"
+                  title={'The most cool title in tha world'}
+                  postId={"1"}
                   postedBy='Sam Beterson'/>
               </Grid>
               <Grid item xs={6}>
@@ -56,6 +60,8 @@ class HomeContainer extends Component {
                   classesPaper={classes.paper}
                   textFrom="bottom"
                   textAlign="left"
+                  title={'The most cool title in tha world'}
+                  postId={"1"}
                   postedBy='Max'/>
               </Grid>
               <Grid item xs={6}>
@@ -63,6 +69,8 @@ class HomeContainer extends Component {
                   classesPaper={classes.paper}
                   textFrom="bottom"
                   textAlign="left"
+                  title={'The most cool title in tha world'}
+                  postId={"1"}
                   postedBy='Leorena'/>
               </Grid>
               <Grid item xs={6}>
@@ -70,6 +78,8 @@ class HomeContainer extends Component {
                   classesPaper={classes.paper}
                   textFrom="bottom"
                   textAlign="left"
+                  title={'The most cool title in tha world'}
+                  postId={"1"}
                   postedBy='Richard'/>
               </Grid>
             </Grid>
