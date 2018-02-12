@@ -15,6 +15,9 @@ const styles = {
   flex: {
     display: 'flex'
   },
+  userInfo: {
+    flex: '1 1 100%'
+  },
   borderAvatar: {
     border: '5px solid #00968854'
   }
@@ -22,7 +25,7 @@ const styles = {
 
 const profileHeader = props => (
   <div className={props.classes.flex}>
-    <div>
+    <div className={props.classes.userInfo}>
       <Typography type="title" gutterBottom>
       { props.userName }
       </Typography>

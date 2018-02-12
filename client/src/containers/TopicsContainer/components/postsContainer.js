@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostPreviewPaper from '../../components/PostPreviewPaper/PostPreviewPaper';
+import PostPreviewPaper from '../../../components/PostPreviewPaper/PostPreviewPaper';
 import Grid from 'material-ui/Grid/Grid';
 import Typography from 'material-ui/Typography/Typography';
 
