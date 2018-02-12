@@ -19,7 +19,7 @@ const styles = theme => ({
 
 class MenuTopics extends Component {
   state = {
-    value: 0, // TODO: Quitar esto e implementar React Router
+    value: 0,
   };
 
   handleChange = (event, value) => {

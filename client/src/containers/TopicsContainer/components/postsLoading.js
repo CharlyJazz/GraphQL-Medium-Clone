@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid/Grid';
 import Typography from 'material-ui/Typography/Typography';
-import PostPreviewLoader from '../../components/UI/Loaders/PostPreviewLoader';
+import PostPreviewLoader from '../../../components/UI/Loaders/PostPreviewLoader';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({

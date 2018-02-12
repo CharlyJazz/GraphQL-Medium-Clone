@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid/Grid';
 import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics';
 import Typography from 'material-ui/Typography/Typography';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { withStyles } from 'material-ui/styles';
-import PostsContainer from './postsContainer';
-import PostLoading from './postsLoading';
+import PostsContainer from './components/postsContainer';
+import PostLoading from './components/postsLoading';
+import query from './query';
 
 const styles = theme => ({
   root: {
@@ -85,25 +85,6 @@ class TopicsContainer extends Component {
   }
 }
 
-const query = gql`
-  query {
-    allTopics {
-      id
-      name
-      description
-      posts {
-        id
-        title
-        body
-        postedBy {
-          id
-          name
-          picture
-        }
-      }
-    }
-  }
-`
 
 export default graphql(query)(
   withStyles(styles)(TopicsContainer)

@@ -18,6 +18,7 @@ class ClapTest < ActiveSupport::TestCase
     @post.claps << clap_3
 
     assert_equal @post.claps.length, 3
+    assert_equal @post.claps.count, 3
     assert_equal @post.claps.sum(:total), 10
   end
 

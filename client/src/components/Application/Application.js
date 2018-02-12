@@ -25,14 +25,14 @@ class Application extends Component {
         <Reboot />
         <Layout> 
           {/*<CustomAnimatedSwitch>*/}
-            <Route path="/"             exact component={HomeContainer}        />
-            <Route path="/auth"         exact component={AuthContainer}        />
-            <Route path="/posts"        exact component={PostsContainer}       />
-            <Route path="/search"       exact component={SearchContainer}      />
-            <Route path="/topics"       exact component={TopicsContainer}      />
-            <Route path="/topics/:name" exact component={TopicsContainer}      />
-            <Route path="/profile"      exact component={ProfileContainer}     />
-            <Route path="/collections"  exact component={CollectionsContainer} />
+            <Route path="/"              exact component={HomeContainer}        />
+            <Route path="/auth"          exact component={AuthContainer}        />
+            <Route path="/posts"         exact component={PostsContainer}       />
+            <Route path="/search"        exact component={SearchContainer}      />
+            <Route path="/topics"        exact component={TopicsContainer}      />
+            <Route path="/topics/:name"  exact component={TopicsContainer}      />
+            <Route path="/profile/:name" exact component={ProfileContainer}     />
+            <Route path="/collections"   exact component={CollectionsContainer} />
           {/*</CustomAnimatedSwitch> */}
         </Layout>
       </React.Fragment>

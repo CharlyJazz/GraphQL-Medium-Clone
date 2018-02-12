@@ -10,6 +10,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 import { BrowserRouter } from 'react-router-dom';
 
+import registerServiceWorker from './registerServiceWorker';
+
 
 // Here you create the HttpLink that will connect your ApolloClient
 // instance with the GraphQL API; your GraphQL server will be running
@@ -32,3 +34,5 @@ ReactDOM.render(
   </ApolloProvider>
   , document.getElementById('root')
 )
+
+registerServiceWorker();
