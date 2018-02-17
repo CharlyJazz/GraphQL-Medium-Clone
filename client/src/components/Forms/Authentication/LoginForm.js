@@ -8,36 +8,15 @@ import Button from 'material-ui/Button/Button';
 import Typography from 'material-ui/Typography/Typography';
 import Divider from 'material-ui/Divider/Divider';
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
-
-const styles = theme => ({
-  container: {
-    boxShadow: 'none !important'
-  },
-  boxMarginTop: {
-    marginTop: 20
-  },
-  formControl: {
-    width: '100%'
-  },
-  swithFormButton: {
-    marginTop: 10
-  },
-  cardContent: {
-    width: '50%',
-    margin: '0 auto'
-  },
-  icon: {
-    verticalAlign: 'middle',
-    fill: '#009688'
-  }
-});
+import stylesBase from './Styles/stylesBase';
 
 let LoginForm = ({
   onSubmit,
   onChange,
   errors,
   user,
-  classes
+  classes,
+  clickedSwitchForm
 }) => (
   <Card className={classes.container}>
     <CardContent className={classes.cardContent}>
@@ -55,7 +34,7 @@ let LoginForm = ({
 
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="email-input">Email</InputLabel>
-          <Input id="email-input" value={user.email} onChange={onChange} type="email"/>
+          <Input id="email-input" name="email" value={user.email} onChange={onChange} type="email"/>
           {errors.email && 
             <FormHelperText id="email-input-text">errors.email</FormHelperText>
           }
@@ -63,7 +42,7 @@ let LoginForm = ({
 
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="password-input">Password</InputLabel>
-          <Input id="password-input" value={user.password} onChange={onChange} type="password" />
+          <Input id="password-input" name="password" value={user.password} onChange={onChange} type="password" />
           {errors.password && 
             <FormHelperText id="password-input-text">errors.password</FormHelperText>
           }
@@ -81,7 +60,12 @@ let LoginForm = ({
       <Typography type="body1" color="inherit">
       Don't have an account?  
       </Typography>
-      <Button raised color="secondary" size="small" className={classes.swithFormButton}>
+      <Button
+        raised 
+        color="secondary" 
+        size="small" 
+        className={classes.swithFormButton}
+        onClick={clickedSwitchForm}>
         Create one
       </Button>
     </div>
@@ -92,7 +76,8 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  clickedSwitchForm: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(LoginForm);
+export default withStyles(stylesBase)(LoginForm);

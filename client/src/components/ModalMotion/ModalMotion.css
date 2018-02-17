@@ -7,11 +7,12 @@
   padding: 10px;
   text-align: center;
   box-sizing: border-box;
-  top: 30%;
+  top: 0;
   left: 25%;
   width: 50%;
   transition: all 0.3s ease-out;
   animation: openModal 0.4s ease-out forwards;
+  margin-top: 2.5%;
 }
 
 .ModalMotionClosed {

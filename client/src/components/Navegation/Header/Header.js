@@ -13,6 +13,7 @@ import InputSearch from './InputSearch/InputSearch';
 import { withRouter } from 'react-router-dom';
 import ModalMotion from '../../ModalMotion/ModalMotion';
 import LoginContainer from '../../../containers/LoginContainer';
+import SignUpContainer from '../../../containers/SignUpContainer';
 
 const styles = theme => ({
   root: {
@@ -32,7 +33,8 @@ class Header extends Component {
     showSearchInput: false,
     anchorEl: null,
     isAuth: false,
-    modalIsOpen: false
+    modalIsOpen: false,
+    showSignInOrSignUp: true
   }
 
   handleToggleSearch = () => {
@@ -55,8 +57,24 @@ class Header extends Component {
     this.props.history.push('/')
   }
 
-  handleModalOpen = () => {
-    this.setState({ modalIsOpen: true });
+  handleSwitchForm = () => {
+    this.setState((prevState) => {
+      return {
+        showSignInOrSignUp: !prevState.showSignInOrSignUp
+      }
+    });
+  }
+
+  handleModalOpen = (showSignInOrSignUp) => {
+    /*
+    * Open Modal with a form
+    * SignIn -> true
+    * SignUp -> false
+    */
+    this.setState({
+       modalIsOpen: true ,
+       showSignInOrSignUp: showSignInOrSignUp
+    });
   }
 
   handleModalClosed = () => {
@@ -120,14 +138,14 @@ class Header extends Component {
                   <Button
                     color="inherit" 
                     className={classes.button}
-                    onClick={this.handleModalOpen}>
+                    onClick={() => this.handleModalOpen(true)}>
                     Sign In
                   </Button>
                   <Button
                     raised
                     color="primary" 
                     className={classes.button}
-                    onClick={this.handleModalOpen}>
+                    onClick={() => this.handleModalOpen(false)}>
                     Get started
                   </Button>
                 </React.Fragment>
@@ -139,7 +157,15 @@ class Header extends Component {
         <ModalMotion
           show={this.state.modalIsOpen}
           closed={this.handleModalClosed}>
-            <LoginContainer />
+          {
+            this.state.showSignInOrSignUp 
+              ? <LoginContainer 
+                  clickedSwitchForm={this.handleSwitchForm}
+                />
+              : <SignUpContainer
+                  clickedSwitchForm={this.handleSwitchForm}
+                />
+          }
         </ModalMotion>
       </div>
     );

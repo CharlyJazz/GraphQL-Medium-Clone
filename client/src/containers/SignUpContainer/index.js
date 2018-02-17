@@ -1,26 +1,23 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SignUpForm from '../../components/Forms/Authentication/SignUpForm';
 
 class SignUpContainer extends React.Component {
-
-  /**
-   * Class constructor.
-   */
   constructor(props) {
     super(props);
 
-    // set the initial component state
     this.state = {
       errors: {},
       user: {
         email: '',
         name: '',
-        password: ''
-      }
+        password: '',
+        passwordRepeat: '',
+        bio: '',
+        image: ''
+      },
+      showPassword: false
     };
-
-    this.processForm = this.processForm.bind(this);
-    this.changeUser = this.changeUser.bind(this);
   }
 
   /**
@@ -28,13 +25,23 @@ class SignUpContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  changeUser(event) {
-    const field = event.target.name;
-    const user = this.state.user;
-    user[field] = event.target.value;
+  changeUser = (event) => {
+    const user = {...this.state.user};
+    user[event.target.name] = event.target.value;
 
     this.setState({
       user
+    });
+  }
+
+  /**
+   * Change the showPassword state.
+   */
+  handleShowPasswordToggle = () => {
+    this.setState((prevState) => {
+      return {
+        showPassword: !prevState.showPassword
+      }
     });
   }
 
@@ -50,6 +57,9 @@ class SignUpContainer extends React.Component {
     console.log('name:', this.state.user.name);
     console.log('email:', this.state.user.email);
     console.log('password:', this.state.user.password);
+    console.log('passwordRepeat:', this.state.user.passwordConfirmation);
+    console.log('bio:', this.state.user.bio);
+    console.log('image:', this.state.user.image);
   }
 
   /**
@@ -62,10 +72,16 @@ class SignUpContainer extends React.Component {
         onChange={this.changeUser}
         errors={this.state.errors}
         user={this.state.user}
+        showPassword={this.state.showPassword}
+        clickedShowPasswordToggle={this.handleShowPasswordToggle}
+        clickedSwitchForm={this.props.clickedSwitchForm}
       />
     );
   }
+}
 
+SignUpContainer.propTypes = {
+  clickedSwitchForm: PropTypes.func.isRequired
 }
 
 export default SignUpContainer;
