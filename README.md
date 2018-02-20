@@ -15,33 +15,35 @@ The easy way to start is to clone this repo, read the prerequisites and then get
 
 ### Installing
 
-Get only one package manager and follow the instructions depending on your choice
+Get only one package manager and install Ruby depending of your choice
 
 * rbenv - [Install Guide](https://github.com/rbenv/rbenv)
+```
+$ rbenv install 2.4.2
+```
+
 * RVM - [Install Guide](https://rvm.io/rvm/install)
-
-
-#### If you installed rbenv
-
-
-#### If you installed RVM
-
-1. Install Ruby:
 ```
-  rvm install 2.4.2
-```
-  
-2. Integrate bundler : 
-```
-  gem install bundler
+$ rvm install 2.4.2
 ```
 
-3. Go to the Project's directory and install all the dependencies with:
+Then follow the next instrucctions:
+
+1. Integrate bundler : 
 ```
-bundle install
+$ gem install bundler
 ```
 
-4. Configurate the Data base with:
+2. Go to the Project's directory and install all the dependencies with:
 ```
-rails db:schema:load && rails db:seed
+$ bundle install
 ```
+
+3. Configurate the Data base with:
+```
+$ rails db:schema:load && rails db:seed
+```
+
+
+
+ 
