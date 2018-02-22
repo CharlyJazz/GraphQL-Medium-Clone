@@ -1,6 +1,7 @@
 <a href="https://ibb.co/cuWEim"><img width="100%" src="https://preview.ibb.co/kkCy9R/project_logo.png" alt="project_logo" border="0"></a>
 ----------------------
 [![Build Status](https://travis-ci.org/CharlyJazz/Rails-Graphql-React-Apollo.svg?branch=master)](https://travis-ci.org/CharlyJazz/Rails-Graphql-React-Apollo)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 A project to learn a lot of tecnologies and build something awesome and great inspired on Medium.
 
