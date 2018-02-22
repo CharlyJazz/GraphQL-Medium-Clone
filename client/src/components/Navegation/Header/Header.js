@@ -10,14 +10,18 @@ import Search from 'material-ui-icons/Search';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import PropTypes from 'prop-types';
 import InputSearch from './InputSearch/InputSearch';
-
+import { withRouter } from 'react-router-dom';
+import ModalMotion from '../../ModalMotion/ModalMotion';
+import LoginContainer from '../../../containers/LoginContainer';
+import SignUpContainer from '../../../containers/SignUpContainer';
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
-  flex: {
+  brand: {
     flex: 1,
+    cursor: 'pointer'
   },
   button: {
     margin: theme.spacing.unit,
@@ -28,7 +32,9 @@ class Header extends Component {
   state = {
     showSearchInput: false,
     anchorEl: null,
-    isAuth: false, // TODO: Prop
+    isAuth: false,
+    modalIsOpen: false,
+    showSignInOrSignUp: true
   }
 
   handleToggleSearch = () => {
@@ -47,6 +53,34 @@ class Header extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleClickBrand = () => {
+    this.props.history.push('/')
+  }
+
+  handleSwitchForm = () => {
+    this.setState((prevState) => {
+      return {
+        showSignInOrSignUp: !prevState.showSignInOrSignUp
+      }
+    });
+  }
+
+  handleModalOpen = (showSignInOrSignUp) => {
+    /*
+    * Open Modal with a form
+    * SignIn -> true
+    * SignUp -> false
+    */
+    this.setState({
+       modalIsOpen: true ,
+       showSignInOrSignUp: showSignInOrSignUp
+    });
+  }
+
+  handleModalClosed = () => {
+    this.setState({ modalIsOpen: false });
+  }
+
   render () {
     const { classes } = this.props;
     const { isAuth, anchorEl } = this.state;
@@ -56,7 +90,7 @@ class Header extends Component {
       <div className={classes.root}>
         <AppBar position="static" color="default" className="DontUseShadow">
           <Toolbar>
-            <Typography type="title" color="inherit" className={classes.flex}>
+            <Typography type="title" color="inherit" className={classes.brand} onClick={this.handleClickBrand}>
               AppStories
             </Typography>
             {this.state.showSearchInput && <InputSearch />}
@@ -101,13 +135,38 @@ class Header extends Component {
               : 
               (
                 <React.Fragment>
-                  <Button color="inherit" className={classes.button}>Sign In</Button>
-                  <Button raised color="primary" className={classes.button}>Get started</Button>
+                  <Button
+                    color="inherit" 
+                    className={classes.button}
+                    onClick={() => this.handleModalOpen(true)}>
+                    Sign In
+                  </Button>
+                  <Button
+                    raised
+                    color="primary" 
+                    className={classes.button}
+                    onClick={() => this.handleModalOpen(false)}>
+                    Get started
+                  </Button>
                 </React.Fragment>
               )
             }
           </Toolbar>
         </AppBar>
+
+        <ModalMotion
+          show={this.state.modalIsOpen}
+          closed={this.handleModalClosed}>
+          {
+            this.state.showSignInOrSignUp 
+              ? <LoginContainer 
+                  clickedSwitchForm={this.handleSwitchForm}
+                />
+              : <SignUpContainer
+                  clickedSwitchForm={this.handleSwitchForm}
+                />
+          }
+        </ModalMotion>
       </div>
     );
   }
@@ -117,4 +176,4 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));
