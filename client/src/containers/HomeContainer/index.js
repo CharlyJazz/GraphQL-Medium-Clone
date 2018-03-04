@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics';
-import Grid from 'material-ui/Grid/Grid';
-import { withStyles } from 'material-ui/styles';
-import PostPreviewPaper from '../../components/PostPreviewPaper/PostPreviewPaper';
+import React, { Component } from 'react'
+import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics'
+import Grid from 'material-ui/Grid/Grid'
+import { withStyles } from 'material-ui/styles'
+import PostPreviewPaper from '../../components/PostPreviewPaper/PostPreviewPaper'
 
 const styles = theme => ({
   root: {
@@ -13,12 +13,12 @@ const styles = theme => ({
     padding: 16,
     color: theme.palette.text.secondary,
   }
-});
+})
 
 class HomeContainer extends Component {
   state = {}
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
  
     return (
       <React.Fragment>
@@ -90,4 +90,4 @@ class HomeContainer extends Component {
   }
 }
  
-export default withStyles(styles)(HomeContainer);
+export default withStyles(styles)(HomeContainer)

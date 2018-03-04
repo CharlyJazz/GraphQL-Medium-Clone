@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card, { CardContent } from 'material-ui/Card';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Button from 'material-ui/Button/Button';
-import Typography from 'material-ui/Typography/Typography';
-import Divider from 'material-ui/Divider/Divider';
-import AccountBoxIcon from 'material-ui-icons/AccountBox';
-import stylesBase from './Styles/stylesBase';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Card, { CardContent } from 'material-ui/Card'
+import { withStyles } from 'material-ui/styles'
+import Input, { InputLabel } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import Button from 'material-ui/Button/Button'
+import Typography from 'material-ui/Typography/Typography'
+import Divider from 'material-ui/Divider/Divider'
+import AccountBoxIcon from 'material-ui-icons/AccountBox'
+import stylesBase from './Styles/stylesBase'
 
 let LoginForm = ({
   onSubmit,
@@ -70,7 +70,7 @@ let LoginForm = ({
       </Button>
     </div>
   </Card>
-);
+)
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
@@ -78,6 +78,6 @@ LoginForm.propTypes = {
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   clickedSwitchForm: PropTypes.func.isRequired
-};
+}
 
-export default withStyles(stylesBase)(LoginForm);
+export default withStyles(stylesBase)(LoginForm)

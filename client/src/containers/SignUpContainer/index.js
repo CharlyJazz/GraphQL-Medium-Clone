@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SignUpForm from '../../components/Forms/Authentication/SignUpForm';
+import React from 'react'
+import PropTypes from 'prop-types'
+import SignUpForm from '../../components/Forms/Authentication/SignUpForm'
 
 class SignUpContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       errors: {},
@@ -17,7 +17,7 @@ class SignUpContainer extends React.Component {
         image: ''
       },
       showPassword: false
-    };
+    }
   }
 
   /**
@@ -26,12 +26,12 @@ class SignUpContainer extends React.Component {
    * @param {object} event - the JavaScript event object
    */
   changeUser = (event) => {
-    const user = {...this.state.user};
-    user[event.target.name] = event.target.value;
+    const user = {...this.state.user}
+    user[event.target.name] = event.target.value
 
     this.setState({
       user
-    });
+    })
   }
 
   /**
@@ -42,7 +42,7 @@ class SignUpContainer extends React.Component {
       return {
         showPassword: !prevState.showPassword
       }
-    });
+    })
   }
 
   /**
@@ -52,14 +52,14 @@ class SignUpContainer extends React.Component {
    */
   processForm(event) {
     // prevent default action. in this case, action is the form submission event
-    event.preventDefault();
+    event.preventDefault()
 
-    console.log('name:', this.state.user.name);
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
-    console.log('passwordRepeat:', this.state.user.passwordConfirmation);
-    console.log('bio:', this.state.user.bio);
-    console.log('image:', this.state.user.image);
+    console.log('name:', this.state.user.name)
+    console.log('email:', this.state.user.email)
+    console.log('password:', this.state.user.password)
+    console.log('passwordRepeat:', this.state.user.passwordConfirmation)
+    console.log('bio:', this.state.user.bio)
+    console.log('image:', this.state.user.image)
   }
 
   /**
@@ -76,7 +76,7 @@ class SignUpContainer extends React.Component {
         clickedShowPasswordToggle={this.handleShowPasswordToggle}
         clickedSwitchForm={this.props.clickedSwitchForm}
       />
-    );
+    )
   }
 }
 
@@ -84,4 +84,4 @@ SignUpContainer.propTypes = {
   clickedSwitchForm: PropTypes.func.isRequired
 }
 
-export default SignUpContainer;
+export default SignUpContainer

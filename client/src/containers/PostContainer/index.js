@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-class AuthContainer extends Component {
+class PostContainer extends Component {
   state = {}
   render() { 
     return ( 
-      <h1>AuthContainer</h1>
+      <h1>PostContainer</h1>
      )
   }
 }
  
-export default AuthContainer
+export default PostContainer

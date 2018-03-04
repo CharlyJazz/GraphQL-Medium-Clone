@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withStyles } from 'material-ui/styles';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import AppBar from 'material-ui/AppBar';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { withStyles } from 'material-ui/styles'
+import Tabs, { Tab } from 'material-ui/Tabs'
+import AppBar from 'material-ui/AppBar'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 
 const styles = theme => ({
@@ -15,22 +15,22 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 1,
     backgroundColor: theme.palette.background.paper,
   },
-});
+})
 
 class MenuTopics extends Component {
   state = {
     value: 0,
-  };
+  }
 
   handleChange = (event, value) => {
-    this.setState({ value });
-  };
+    this.setState({ value })
+  }
 
   handleClickHome = () => {
     /*
     * Redirect to /
     * */
-    this.timeOut && clearTimeout(this.timeOut); // Prevent multiple redirect
+    this.timeOut && clearTimeout(this.timeOut) // Prevent multiple redirect
 
     this.props.history.push('/')
   }
@@ -39,7 +39,7 @@ class MenuTopics extends Component {
     /*
     * Redirect to /topic/:topicName
     * */
-    this.timeOut && clearTimeout(this.timeOut); // Prevent multiple redirect
+    this.timeOut && clearTimeout(this.timeOut) // Prevent multiple redirect
 
     this.timeOut = setTimeout(() => {
       this.props.history.push(`/topics/${this.props.data.allTopics.find((n) => {
@@ -49,8 +49,8 @@ class MenuTopics extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+    const { classes } = this.props
+    const { value } = this.state
 
     return (
       <div className={classes.root}>
@@ -78,13 +78,13 @@ class MenuTopics extends Component {
         }
         
       </div>
-    );
+    )
   }
 }
 
 MenuTopics.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 // Search the Topics
 const query = gql`
@@ -100,4 +100,4 @@ export default graphql(query)(
   withRouter(
     withStyles(styles)(MenuTopics)
   )
-);
+)

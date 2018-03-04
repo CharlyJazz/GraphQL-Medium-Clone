@@ -1,11 +1,11 @@
-import React from 'react';
-import Avatar from 'material-ui/Avatar';
-import BookmarkBorder from 'material-ui-icons/BookmarkBorder';
-import ExpandMore from 'material-ui-icons/ExpandMore';
-import Typography from 'material-ui/Typography/Typography';
+import React from 'react'
+import Avatar from 'material-ui/Avatar'
+import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
+import ExpandMore from 'material-ui-icons/ExpandMore'
+import Typography from 'material-ui/Typography/Typography'
 
-import './PostPreviewFooter.css';
-import Anchor from '../../UI/Anchor/Anchor';
+import './PostPreviewFooter.css'
+import Anchor from '../../UI/Anchor/Anchor'
 
 
 const PostPreviewFooter = props => (
@@ -29,4 +29,4 @@ const PostPreviewFooter = props => (
   </div>
 )
 
-export default PostPreviewFooter;
+export default PostPreviewFooter

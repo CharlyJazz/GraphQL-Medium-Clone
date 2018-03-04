@@ -1,7 +1,7 @@
-import React from 'react';
-import Grid from 'material-ui/Grid/Grid';
-import Paper from 'material-ui/Paper/Paper';
-import { withStyles } from 'material-ui/styles';
+import React from 'react'
+import Grid from 'material-ui/Grid/Grid'
+import Paper from 'material-ui/Paper/Paper'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   root: {
@@ -12,10 +12,10 @@ const styles = theme => ({
     padding: 16,
     color: theme.palette.text.secondary,
   }
-});
+})
 
 const PaperCenter = props => {
-  const { classes } = props;
+  const { classes } = props
   return (
     <div className={classes.root}>
       <Grid item xs={12}>
@@ -31,4 +31,4 @@ const PaperCenter = props => {
   )
 }
  
-export default withStyles(styles)(PaperCenter);
+export default withStyles(styles)(PaperCenter)

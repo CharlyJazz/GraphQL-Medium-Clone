@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/Application/Application';
+import App from './application';
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
@@ -12,6 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import registerServiceWorker from './registerServiceWorker';
 
+import './index.css'
 
 // Here you create the HttpLink that will connect your ApolloClient
 // instance with the GraphQL API; your GraphQL server will be running
