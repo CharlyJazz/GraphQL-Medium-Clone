@@ -1,36 +1,26 @@
 import React from 'react'
 import 'medium-draft/lib/index.css'
-import {
-  Editor,
-  createEditorState,
-} from 'medium-draft'
+import { Editor } from 'medium-draft'
+import ImageButton from './Sides/ImageButton'
 
 class MyEditor extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      editorState: createEditorState(), // for empty content
-    }
-
-    /*
-    this.state = {
-      editorState: createEditorState(data), // with content
-    }
-    */
-
-    this.onChange = (editorState) => {
-      this.setState({ editorState })
-    }
+    this.sideButtons = [{
+      title: 'Add a Image',
+      component: ImageButton,
+    }];
   }
 
   render() {
-    const { editorState } = this.state
+    const editorState = this.props.editorState
     return (
       <Editor
         ref="editor"
         editorState={editorState}
-        onChange={this.onChange} />
+        onChange={this.props.onChange}
+        sideButtons={this.sideButtons} />
     )
   }
 }
