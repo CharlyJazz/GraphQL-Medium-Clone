@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import MyEditor from '../../components/Editor'
+import Grid from 'material-ui/Grid/Grid'
+import { withStyles } from 'material-ui/styles'
+import PaperCenter from '../../components/UI/PaperCenter/PaperCenter'
+
+const styles = theme => ({
+  
+})
 
 class NewPostContainer extends Component {
-  state = {}
-  render() { 
+  render() {
     return (
-      <h1>
-        Create a Post
-      </h1>
-    )
+      <PaperCenter>
+        <MyEditor/>
+      </PaperCenter>
+    );
   }
 }
- 
-export default NewPostContainer;
+
+export default withStyles(styles)(NewPostContainer)
