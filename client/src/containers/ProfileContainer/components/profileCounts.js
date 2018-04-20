@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from 'material-ui/styles/withStyles';
-import Typography from 'material-ui/Typography/Typography';
-import ImportContactsIcon from 'material-ui-icons/ImportContacts';
-import CommentIcon from 'material-ui-icons/Comment';
-import ClapIcon from 'material-ui-icons/ThumbUp';
-import CollectionIcon from 'material-ui-icons/Collections';
-import BookmarkIcon from 'material-ui-icons/CollectionsBookmark';
+import React from 'react'
+import PropTypes from 'prop-types'
+import withStyles from 'material-ui/styles/withStyles'
+import Typography from 'material-ui/Typography/Typography'
+import ImportContactsIcon from 'material-ui-icons/ImportContacts'
+import CommentIcon from 'material-ui-icons/Comment'
+import ClapIcon from 'material-ui-icons/ThumbUp'
+import CollectionIcon from 'material-ui-icons/Collections'
+import BookmarkIcon from 'material-ui-icons/CollectionsBookmark'
 
 const styles = {
   flex: {
@@ -20,7 +20,7 @@ const styles = {
   icon: {
     verticalAlign: 'top'
   }
-};
+}
 
 const profileCounts = props => (
   <div className={props.classes.flex}>
@@ -65,6 +65,6 @@ profileCounts.propTypes = {
   claps: PropTypes.number,
   collections: PropTypes.number,
   bookmarks: PropTypes.number,
-};
+}
 
-export default withStyles(styles)(profileCounts);
+export default withStyles(styles)(profileCounts)

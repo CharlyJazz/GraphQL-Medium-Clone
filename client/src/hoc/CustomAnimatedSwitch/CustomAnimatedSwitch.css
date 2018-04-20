@@ -1,8 +1,0 @@
-.CustomAnimatedSwitch {
-  position: relative;
-}
-
-.CustomAnimatedSwitch > div {
-  position: absolute;
-  width: 100%
-}

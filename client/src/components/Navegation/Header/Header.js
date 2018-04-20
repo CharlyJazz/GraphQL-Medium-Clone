@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import IconButton from 'material-ui/IconButton';
-import Search from 'material-ui-icons/Search';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import PropTypes from 'prop-types';
-import InputSearch from './InputSearch/InputSearch';
-import { withRouter } from 'react-router-dom';
-import ModalMotion from '../../ModalMotion/ModalMotion';
-import LoginContainer from '../../../containers/LoginContainer';
-import SignUpContainer from '../../../containers/SignUpContainer';
+import React, { Component } from 'react'
+import { withStyles } from 'material-ui/styles'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import Menu, { MenuItem } from 'material-ui/Menu'
+import IconButton from 'material-ui/IconButton'
+import Search from 'material-ui-icons/Search'
+import AccountCircle from 'material-ui-icons/AccountCircle'
+import PropTypes from 'prop-types'
+import InputSearch from './InputSearch/InputSearch'
+import { withRouter } from 'react-router-dom'
+import ModalMotion from '../../ModalMotion/ModalMotion'
+import LoginContainer from '../../../containers/LoginContainer'
+import SignUpContainer from '../../../containers/SignUpContainer'
 
 const styles = theme => ({
   root: {
@@ -26,7 +26,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-});
+})
 
 class Header extends Component {
   state = {
@@ -42,16 +42,16 @@ class Header extends Component {
       return {
         showSearchInput: !prevState.showSearchInput
       }
-    });
+    })
   }
 
   handleUserMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+    this.setState({ anchorEl: event.currentTarget })
+  }
 
   handleUserMenuClose = () => {
-    this.setState({ anchorEl: null });
-  };
+    this.setState({ anchorEl: null })
+  }
 
   handleClickBrand = () => {
     this.props.history.push('/')
@@ -62,7 +62,7 @@ class Header extends Component {
       return {
         showSignInOrSignUp: !prevState.showSignInOrSignUp
       }
-    });
+    })
   }
 
   handleModalOpen = (showSignInOrSignUp) => {
@@ -74,17 +74,17 @@ class Header extends Component {
     this.setState({
        modalIsOpen: true ,
        showSignInOrSignUp: showSignInOrSignUp
-    });
+    })
   }
 
   handleModalClosed = () => {
-    this.setState({ modalIsOpen: false });
+    this.setState({ modalIsOpen: false })
   }
 
   render () {
-    const { classes } = this.props;
-    const { isAuth, anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+    const { classes } = this.props
+    const { isAuth, anchorEl } = this.state
+    const open = Boolean(anchorEl)
 
     return (
       <div className={classes.root}>
@@ -168,12 +168,12 @@ class Header extends Component {
           }
         </ModalMotion>
       </div>
-    );
+    )
   }
 }
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withRouter(withStyles(styles)(Header));
+export default withRouter(withStyles(styles)(Header))

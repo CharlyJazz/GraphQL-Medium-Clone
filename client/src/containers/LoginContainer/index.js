@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import LoginForm from '../../components/Forms/Authentication/LoginForm';
+import React from 'react'
+import PropTypes from 'prop-types'
+import LoginForm from '../../components/Forms/Authentication/LoginForm'
 
 class LoginContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       errors: {},
@@ -12,7 +12,7 @@ class LoginContainer extends React.Component {
         email: '',
         password: ''
       }
-    };
+    }
   }
 
   /**
@@ -22,10 +22,10 @@ class LoginContainer extends React.Component {
    */
   processForm = (event) => {
     // prevent default action. in this case, action is the form submission event
-    event.preventDefault();
+    event.preventDefault()
 
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
+    console.log('email:', this.state.user.email)
+    console.log('password:', this.state.user.password)
   }
 
   /**
@@ -34,12 +34,12 @@ class LoginContainer extends React.Component {
    * @param {object} event - the JavaScript event object
    */
   changeUser = (event) => {
-    const user = {...this.state.user};
-    user[event.target.name] = event.target.value;
+    const user = {...this.state.user}
+    user[event.target.name] = event.target.value
 
     this.setState({
       user
-    }, () => console.log(user));
+    }, () => console.log(user))
   }
 
   /**
@@ -54,7 +54,7 @@ class LoginContainer extends React.Component {
         user={this.state.user}
         clickedSwitchForm={this.props.clickedSwitchForm}
       />
-    );
+    )
   }
 }
 
@@ -62,4 +62,4 @@ LoginContainer.propTypes = {
   clickedSwitchForm: PropTypes.func.isRequired
 }
 
-export default LoginContainer;
+export default LoginContainer

@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import AppBar from 'material-ui/AppBar'
+import Tabs, { Tab } from 'material-ui/Tabs'
+import Typography from 'material-ui/Typography'
 
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
       {props.children}
     </Typography>
-  );
+  )
 }
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
 const styles = theme => ({
   root: {
@@ -25,20 +25,20 @@ const styles = theme => ({
   bar: {
     backgroundColor: 'transparent !important'
   }
-});
+})
 
 class ProfileTabs extends React.Component {
   state = {
     value: 'posts',
-  };
+  }
 
   handleChange = (event, value) => {
-    this.setState({ value });
-  };
+    this.setState({ value })
+  }
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+    const { classes } = this.props
+    const { value } = this.state
 
     return (
       <div className={classes.root}>
@@ -60,12 +60,12 @@ class ProfileTabs extends React.Component {
         {value === 'collections' && <TabContainer>Collections</TabContainer>}
         {value === 'comments'    && <TabContainer>Comments</TabContainer>}
       </div>
-    );
+    )
   }
 }
 
 ProfileTabs.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(ProfileTabs);
+export default withStyles(styles)(ProfileTabs)

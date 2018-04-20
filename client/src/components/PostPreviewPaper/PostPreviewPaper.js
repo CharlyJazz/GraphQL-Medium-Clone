@@ -1,12 +1,12 @@
-import React from 'react';
-import Paper from "material-ui/Paper/Paper";
-import PropTypes from 'prop-types';
-import ImgResponsive from '../UI/ImageResponsive/ImageResponsive';
-import PostPreviewFooter from './PostPreviewFooter/PostPreviewFooter';
-import Typography from 'material-ui/Typography/Typography';
-import Anchor from '../UI/Anchor/Anchor';
+import React from 'react'
+import Paper from "material-ui/Paper/Paper"
+import PropTypes from 'prop-types'
+import ImgResponsive from '../UI/ImageResponsive/ImageResponsive'
+import PostPreviewFooter from './PostPreviewFooter/PostPreviewFooter'
+import Typography from 'material-ui/Typography/Typography'
+import Anchor from '../UI/Anchor/Anchor'
 
-import './PostPreviewPaper.css';
+import './PostPreviewPaper.css'
 
 
 const PostPreviewPaper = props => {
@@ -14,14 +14,14 @@ const PostPreviewPaper = props => {
     props.classesPaper && props.classesPaper,
     'DontUseShadow',
     'PostPreviewPaper'
-  ];
+  ]
 
-  let divTextStyle = {'textAlign': 'center'};
+  let divTextStyle = {'textAlign': 'center'}
 
   if (props.textAlign === 'left') {
-    divTextStyle['textAlign'] = 'left';
+    divTextStyle['textAlign'] = 'left'
   } else if (props.textAlign === 'right') {
-    divTextStyle['textAlign'] = 'right';
+    divTextStyle['textAlign'] = 'right'
   }
 
   let divText = (
@@ -64,7 +64,7 @@ PostPreviewPaper.defaultProps = {
   textFrom: 'top',
   imgUrl: 'https://cdn-images-1.medium.com/max/427/1*AUdzgoLMR_28CgeX_YTzXA.png',
   imgAlt: 'Image Alt'
-};
+}
 
 PostPreviewPaper.propTypes = {
   textAlign: PropTypes.string,
@@ -75,4 +75,4 @@ PostPreviewPaper.propTypes = {
   postId: PropTypes.string.isRequired
 }
 
-export default PostPreviewPaper;
+export default PostPreviewPaper

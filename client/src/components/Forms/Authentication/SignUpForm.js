@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card, { CardContent } from 'material-ui/Card';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Button from 'material-ui/Button/Button';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography/Typography';
-import Divider from 'material-ui/Divider/Divider';
-import AccountBoxIcon from 'material-ui-icons/AccountBox';
-import Visibility from 'material-ui-icons/Visibility';
-import VisibilityOff from 'material-ui-icons/VisibilityOff';
-import stylesBase from './Styles/stylesBase';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Card, { CardContent } from 'material-ui/Card'
+import { withStyles } from 'material-ui/styles'
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import Button from 'material-ui/Button/Button'
+import IconButton from 'material-ui/IconButton'
+import Typography from 'material-ui/Typography/Typography'
+import Divider from 'material-ui/Divider/Divider'
+import AccountBoxIcon from 'material-ui-icons/AccountBox'
+import Visibility from 'material-ui-icons/Visibility'
+import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import stylesBase from './Styles/stylesBase'
 
 const SignUpForm = ({
   onSubmit,
@@ -150,7 +150,7 @@ const SignUpForm = ({
       </Button>
     </div>
   </Card>
-);
+)
 
 SignUpForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
@@ -160,6 +160,6 @@ SignUpForm.propTypes = {
   showPassword: PropTypes.bool.isRequired,
   clickedShowPasswordToggle: PropTypes.func.isRequired,
   clickedSwitchForm: PropTypes.func.isRequired
-};
+}
 
-export default withStyles(stylesBase)(SignUpForm);
+export default withStyles(stylesBase)(SignUpForm)

@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
-import CSSTransition from "react-transition-group/CSSTransition";
-import './ModalMotion.css';
-import Modal from 'material-ui/Modal/Modal';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
+import CSSTransition from "react-transition-group/CSSTransition"
+import './ModalMotion.css'
+import Modal from 'material-ui/Modal/Modal'
 
 const animationTiming = {
   enter: 400,
   exit: 1000
-};
+}
 
 /**
  * Modal with transitions
@@ -51,4 +51,4 @@ ModalMotion.proptypes = {
   children: PropTypes.node.isRequired
 }
 
-export default ModalMotion;
+export default ModalMotion

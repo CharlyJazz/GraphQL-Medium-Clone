@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import PostPreviewPaper from '../../../components/PostPreviewPaper/PostPreviewPaper';
-import Grid from 'material-ui/Grid/Grid';
-import Typography from 'material-ui/Typography/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import PostPreviewPaper from '../../../components/PostPreviewPaper/PostPreviewPaper'
+import Grid from 'material-ui/Grid/Grid'
+import Typography from 'material-ui/Typography/Typography'
 
 const postsContainer = props =>  {
-  let posts = null;
-  let title = null;
+  let posts = null
+  let title = null
 
   if (props.topicName) {
     title = (
@@ -49,6 +49,6 @@ const postsContainer = props =>  {
 postsContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   posts: PropTypes.array.isRequired
-};
+}
 
-export default postsContainer;
+export default postsContainer

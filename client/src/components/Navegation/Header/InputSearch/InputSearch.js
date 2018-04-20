@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
-import { MenuItem } from 'material-ui/Menu';
-import Downshift from 'downshift';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import TextField from 'material-ui/TextField'
+import Paper from 'material-ui/Paper'
+import { MenuItem } from 'material-ui/Menu'
+import Downshift from 'downshift'
 
 
 const suggestions = [
@@ -42,10 +42,10 @@ const suggestions = [
   { label: 'Brazil' },
   { label: 'British Indian Ocean Territory' },
   { label: 'Brunei Darussalam' },
-];
+]
 
 const renderInput = (inputProps) => {
-  const { InputProps, classes, ref, ...other } = inputProps;
+  const { InputProps, classes, ref, ...other } = inputProps
 
   return (
     <TextField
@@ -58,13 +58,13 @@ const renderInput = (inputProps) => {
         ...InputProps,
       }}
     />
-  );
+  )
 }
 
 const renderSuggestion = (params) => {
-  const { suggestion, index, itemProps, highlightedIndex, selectedItem } = params;
-  const isHighlighted = highlightedIndex === index;
-  const isSelected = selectedItem === suggestion.label;
+  const { suggestion, index, itemProps, highlightedIndex, selectedItem } = params
+  const isHighlighted = highlightedIndex === index
+  const isSelected = selectedItem === suggestion.label
 
   return (
     <MenuItem
@@ -78,23 +78,23 @@ const renderSuggestion = (params) => {
     >
       {suggestion.label}
     </MenuItem>
-  );
+  )
 }
 
 const getSuggestions = (inputValue) => {
-  let count = 0;
+  let count = 0
 
   return suggestions.filter(suggestion => {
     const keep =
       (!inputValue || suggestion.label.toLowerCase().includes(inputValue.toLowerCase())) &&
-      count < 5;
+      count < 5
 
     if (keep) {
-      count += 1;
+      count += 1
     }
 
-    return keep;
-  });
+    return keep
+  })
 }
 
 const styles = {
@@ -104,10 +104,10 @@ const styles = {
   paper: {
     position: 'absolute'
   }
-};
+}
 
 function InputSearch(props) {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <Downshift>
@@ -137,11 +137,11 @@ function InputSearch(props) {
         </div>
       )}
     </Downshift>
-  );
+  )
 }
 
 InputSearch.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(InputSearch);
+export default withStyles(styles)(InputSearch)

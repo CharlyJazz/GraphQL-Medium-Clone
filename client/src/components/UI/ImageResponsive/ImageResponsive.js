@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 let style = { 
   width: '100%',
@@ -10,4 +10,4 @@ const imgResponsive = props => (
   <img style={style} src={props.img} alt="props.alt" />
 )
 
-export default imgResponsive;
+export default imgResponsive

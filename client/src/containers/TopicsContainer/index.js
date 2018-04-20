@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Grid from 'material-ui/Grid/Grid';
-import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics';
-import Typography from 'material-ui/Typography/Typography';
-import { graphql } from 'react-apollo';
-import { withStyles } from 'material-ui/styles';
-import PostsContainer from './components/postsContainer';
-import PostLoading from './components/postsLoading';
-import query from './query';
+import React, { Component } from 'react'
+import Grid from 'material-ui/Grid/Grid'
+import MenuTopics from '../../components/Navegation/MenuTopics/MenuTopics'
+import Typography from 'material-ui/Typography/Typography'
+import { graphql } from 'react-apollo'
+import { withStyles } from 'material-ui/styles'
+import PostsContainer from './components/postsContainer'
+import PostLoading from './components/postsLoading'
+import query from './query'
 
 const styles = theme => ({
   root: {
@@ -17,16 +17,16 @@ const styles = theme => ({
     padding: 16,
     color: theme.palette.text.secondary,
   }
-});
+})
 
 class TopicsContainer extends Component {
   render() {
 
-    let name = this.props.match.params.name || false;
-    let divTitle = null;
-    let topicFiltered = null;
+    let name = this.props.match.params.name || false
+    let divTitle = null
+    let topicFiltered = null
 
-    const { classes } = this.props;
+    const { classes } = this.props
 
 
     if (!this.props.data.loading) {
@@ -88,4 +88,4 @@ class TopicsContainer extends Component {
 
 export default graphql(query)(
   withStyles(styles)(TopicsContainer)
-);
+)

@@ -1,17 +1,17 @@
-import React from 'react';
-import Grid from 'material-ui/Grid/Grid';
-import Typography from 'material-ui/Typography/Typography';
-import PostPreviewLoader from '../../../components/UI/Loaders/PostPreviewLoader';
-import { withStyles } from 'material-ui/styles';
+import React from 'react'
+import Grid from 'material-ui/Grid/Grid'
+import Typography from 'material-ui/Typography/Typography'
+import PostPreviewLoader from '../../../components/UI/Loaders/PostPreviewLoader'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   gridItem: {
     padding: '8px'
   }
-});
+})
 
 const PostLoading = props => {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <Grid container>
@@ -33,4 +33,4 @@ const PostLoading = props => {
   )
 }
 
-export default withStyles(styles)(PostLoading);
+export default withStyles(styles)(PostLoading)

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from 'material-ui/styles/withStyles';
-import Typography from 'material-ui/Typography/Typography';
-import Avatar from 'material-ui/Avatar/Avatar';
+import React from 'react'
+import PropTypes from 'prop-types'
+import withStyles from 'material-ui/styles/withStyles'
+import Typography from 'material-ui/Typography/Typography'
+import Avatar from 'material-ui/Avatar/Avatar'
 
 const styles = {
   avatar: {
@@ -21,7 +21,7 @@ const styles = {
   borderAvatar: {
     border: '5px solid #00968854'
   }
-};
+}
 
 const profileHeader = props => (
   <div className={props.classes.flex}>
@@ -44,17 +44,17 @@ const profileHeader = props => (
         ].join(' ')}/>
     </div>
   </div>
-);
+)
 
 profileHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   imgUrl: PropTypes.string,
   userBio: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
-};
+}
 
 profileHeader.defaultProps = {
   imgUrl: 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg',
 }
 
-export default withStyles(styles)(profileHeader);
+export default withStyles(styles)(profileHeader)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class CollectionsContainer extends Component {
   state = {}
@@ -9,4 +9,4 @@ class CollectionsContainer extends Component {
   }
 }
  
-export default CollectionsContainer;
+export default CollectionsContainer

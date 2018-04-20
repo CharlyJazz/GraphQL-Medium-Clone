@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import Radium from 'radium'
 import Color from 'color'
 
@@ -28,4 +28,4 @@ Anchor.propTypes = {
   children: PropTypes.string.isRequired
 }
 
-export default Radium(Anchor);
+export default Radium(Anchor)
