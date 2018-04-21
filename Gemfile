@@ -31,9 +31,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Graphql Integration
-gem 'graphql'
+gem 'graphql', '1.7.8'
 # Graphiql App
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails', '1.4.8', group: :development
 # Json Web Token
 gem 'jwt'
 # User password secure
