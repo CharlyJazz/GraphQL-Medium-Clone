@@ -142,8 +142,8 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   foreman (~> 0.82.0)
-  graphiql-rails
-  graphql
+  graphiql-rails (= 1.4.8)
+  graphql (= 1.7.8)
   jwt
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
@@ -156,4 +156,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
