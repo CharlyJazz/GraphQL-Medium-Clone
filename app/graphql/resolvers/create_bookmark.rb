@@ -10,7 +10,7 @@ class Resolvers::CreateBookmark < GraphQL::Function
     end
 
     Bookmark.create!(
-      post: Post.find_by(id: args[:postId] ),
+      post: Post.find_by(id: args[:postId]),
       user: ctx[:current_user]
     )
 
