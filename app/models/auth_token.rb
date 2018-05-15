@@ -10,8 +10,12 @@ class AuthToken
   end
 
   def self.verify(token)
-    payload, header = JWT.decode token, key, true, { :algorithm => 'HS256' }
-    return nil if (header['exp'].nil? || Time.now > header['exp'])
-    User.find_by(id: payload['user_id'])
+    begin 
+      payload, header = JWT.decode token, key, true, { :algorithm => 'HS256' }
+      return nil if (header['exp'].nil? || Time.now > header['exp'])
+      User.find_by(id: payload['user_id'])
+    rescue JWT::DecodeError => e
+      return nil
+    end
   end
 end

@@ -19,7 +19,7 @@ class GraphqlController < ApplicationController
     return nil if token.blank?
     AuthToken.verify(token)
   end
-  
+
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
     case ambiguous_param
