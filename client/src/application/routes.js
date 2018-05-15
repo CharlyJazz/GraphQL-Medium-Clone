@@ -17,55 +17,55 @@ const routes = [
   {
     path: '/auth',
     component: AuthContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/post/:id',
     component: PostContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/search',
     component: SearchContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/profile/:name',
     component: ProfileContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/topics',
     component: TopicsContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/topics/:name',
     component: TopicsContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/collections/',
     component: CollectionsContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/collections/:id',
     component: CollectionsContainer,
-    exact: false,
+    exact: true,
     private: false
   },
   {
     path: '/write/post',
     component: NewPostContainer,
-    exact: false,
+    exact: true,
     private: false
   }
 ]

@@ -10,6 +10,8 @@ import mediumDraftExporter from 'medium-draft/lib/exporter'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
 import Typography from 'material-ui/Typography/Typography'
+import mutation from './mutation'
+import { graphql } from 'react-apollo'
 
 const styles = theme => ({
   gridButton: {
@@ -35,8 +37,15 @@ class NewPostContainer extends Component {
     this.setState({ editorState })
   }
 
-  onSubmitPost = () => {
-    console.log(mediumDraftExporter(this.state.editorState.getCurrentContent()))
+  onSubmitPost = async () => {
+    await this.props.createPost({
+      variables: {
+        body: mediumDraftExporter(this.state.editorState.getCurrentContent()),
+        title: this.state.title,
+        picture: 'Image.png',
+        topicId: 2
+      }
+    })
   }
 
   render() {
@@ -72,4 +81,6 @@ class NewPostContainer extends Component {
   }
 }
 
-export default withStyles(styles)(NewPostContainer)
+export default graphql(mutation, {name: 'createPost'})(
+  withStyles(styles)(NewPostContainer)
+)
