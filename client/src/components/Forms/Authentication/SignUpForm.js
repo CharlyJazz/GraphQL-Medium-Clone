@@ -12,14 +12,16 @@ import AccountBoxIcon from 'material-ui-icons/AccountBox'
 import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import stylesBase from './Styles/stylesBase'
+import red from 'material-ui/colors/red'
 
 const SignUpForm = ({
   onSubmit,
   onChange,
-  errors,
-  user,
+  controls,
   classes,
   showPassword,
+  disabled,
+  passwordNoMatch,
   clickedShowPasswordToggle,
   clickedSwitchForm
 }) => (
@@ -33,21 +35,19 @@ const SignUpForm = ({
 
         <AccountBoxIcon className={classes.icon}/>
 
-        <Typography type="body2" color="secondary" gutterBottom>
-          {errors.summary && <p className="error-message">{errors.summary}</p>}
-        </Typography> 
-
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="name-input">Write your Username</InputLabel>
           <Input 
             id="name-input" 
             name="name" 
-            value={user.name} 
-            onChange={onChange} 
+            value={controls.username.value} 
+            onChange={(event) => onChange(event, 'username')} 
             type="text"
           />
-          {errors.name && 
-            <FormHelperText id="name-input-text">{errors.name}</FormHelperText>
+          {controls.username.errors.message && 
+            <FormHelperText id="name-input-text" style={{color: red[500]}}>
+              {controls.username.errors.message}
+            </FormHelperText>
           }
         </FormControl>
 
@@ -56,12 +56,14 @@ const SignUpForm = ({
           <Input 
             id="email-input" 
             name="email" 
-            value={user.email} 
-            onChange={onChange} 
+            value={controls.email.value} 
+            onChange={(event) => onChange(event, 'email')} 
             type="email"
           />
-          {errors.email && 
-            <FormHelperText id="email-input-text">{errors.email}</FormHelperText>
+          {controls.email.errors.message && 
+            <FormHelperText id="email-input-text" style={{color: red[500]}}>
+              {controls.email.errors.message}
+            </FormHelperText>
           }
         </FormControl>
 
@@ -70,12 +72,14 @@ const SignUpForm = ({
           <Input
             id="bio-input"
             name="bio"
-            value={user.bio}
-            onChange={onChange}
+            value={controls.bio.value}
+            onChange={(event) => onChange(event, 'bio')} 
             type="text"
           />
-          {errors.bio && 
-            <FormHelperText id="bio-input-text">{errors.bio}</FormHelperText>
+          {controls.bio.errors.message && 
+            <FormHelperText id="bio-input-text" style={{color: red[500]}}>
+              {controls.bio.errors.message}
+            </FormHelperText>
           }
         </FormControl>
 
@@ -84,8 +88,8 @@ const SignUpForm = ({
           <Input
             id="password-input"
             name="password"
-            value={user.password}
-            onChange={onChange}
+            value={controls.password.value}
+            onChange={(event) => onChange(event, 'password')} 
             type={showPassword ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position="end">
@@ -98,8 +102,10 @@ const SignUpForm = ({
               </InputAdornment>
             }
           />
-          {errors.password && 
-            <FormHelperText id="password-input-text">{errors.password}</FormHelperText>
+          {controls.password.errors.message && 
+            <FormHelperText id="password-input-text" style={{color: red[500]}}>
+              {controls.password.errors.message}
+            </FormHelperText>
           }
         </FormControl>
         
@@ -108,8 +114,8 @@ const SignUpForm = ({
           <Input
             id="passwordRepeat-input" 
             name="passwordRepeat" 
-            value={user.passwordRepeat} 
-            onChange={onChange} 
+            value={controls.passwordRepeat.value} 
+            onChange={(event) => onChange(event, 'passwordRepeat')} 
             type={showPassword ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position="end">
@@ -122,14 +128,22 @@ const SignUpForm = ({
               </InputAdornment>
             }
           />
-          {errors.passwordRepeat && 
-            <FormHelperText id="passwordRepeat-input-text">{errors.passwordRepeat}</FormHelperText>
+          {controls.passwordRepeat.errors.message && 
+            <FormHelperText id="passwordRepeat-input-text" style={{color: red[500]}}>
+              {controls.passwordRepeat.errors.message}
+            </FormHelperText>
           }
         </FormControl>
 
         <div className={classes.boxMarginTop}>
-          <Button raised color="primary" type="submit">
-            Create account
+          <Button raised color="primary" type="submit" disabled={disabled}>
+            { 
+              disabled 
+                ? passwordNoMatch
+                  ? 'The password no match'
+                  : 'Fill fields with correct data' 
+                : 'Create your new Account!' 
+            }
           </Button>
         </div>
 
@@ -146,7 +160,7 @@ const SignUpForm = ({
         size="small" 
         className={classes.swithFormButton}
         onClick={clickedSwitchForm}>
-        Sign In
+        Go to Sign In
       </Button>
     </div>
   </Card>
@@ -155,9 +169,10 @@ const SignUpForm = ({
 SignUpForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  controls: PropTypes.object.isRequired,
   showPassword: PropTypes.bool.isRequired,
+  passwordNoMatch: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
   clickedShowPasswordToggle: PropTypes.func.isRequired,
   clickedSwitchForm: PropTypes.func.isRequired
 }
