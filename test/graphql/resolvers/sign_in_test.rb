@@ -20,7 +20,7 @@ class Resolvers::SignInUserTest < ActiveSupport::TestCase
     assert signin.token.blank? == false
     assert AuthToken.verify(signin.token).kind_of? User
     assert_equal signin.user.id, @user.id
-    assert_equal signin.user.name, @user.name
+    assert_equal signin.user.username, @user.username
     assert_equal signin.user.email, @user.email
   end
 end

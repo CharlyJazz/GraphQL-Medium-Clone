@@ -14,18 +14,18 @@ class Resolvers::UsersSearchTest < ActiveSupport::TestCase
 
     result = find(
       filter: {
-        'name_contains' => user1.name,
+        'username_contains' => user1.username,
         'OR' => [{
-          'name_contains' => user1.name,
+          'username_contains' => user1.username,
           'OR' => [{
-            'name_contains' => user2.name
+            'username_contains' => user2.username
           }]
         }, {
-          'name_contains' => user3.name
+          'username_contains' => user3.username
         }]
       }
     )
 
-    assert_equal result.map(&:name).sort, [user1, user2, user3].map(&:name).sort
+    assert_equal result.map(&:username).sort, [user1, user2, user3].map(&:username).sort
   end
 end
