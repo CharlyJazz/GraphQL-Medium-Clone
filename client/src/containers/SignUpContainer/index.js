@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import SignUpForm from '../../components/Forms/Authentication/SignUpForm'
 import { checkValidity } from '../../shared/checkValidity'
 import { updateObject } from '../../shared/updateObject'
+import { graphql } from 'react-apollo'
+import mutation from './mutation'
 
 class SignUpContainer extends React.Component {
   state = {
@@ -111,8 +113,17 @@ class SignUpContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm(event) {
+  processForm = async (event) => {
     event.preventDefault()
+
+    await this.props.createUser({
+      variables: {
+        name: this.state.controls.username.value,
+        email: this.state.controls.email.value,
+        password: this.state.controls.password.value,
+        bio: this.state.controls.bio.value
+      }
+    })
   }
 
   /**
@@ -158,4 +169,4 @@ SignUpContainer.propTypes = {
   clickedSwitchForm: PropTypes.func.isRequired
 }
 
-export default SignUpContainer
+export default graphql(mutation, {name: 'createUser'})(SignUpContainer)

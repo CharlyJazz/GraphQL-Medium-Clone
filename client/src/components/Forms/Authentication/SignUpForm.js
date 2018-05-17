@@ -36,7 +36,7 @@ const SignUpForm = ({
         <AccountBoxIcon className={classes.icon}/>
 
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-input">Write your Username</InputLabel>
+          <InputLabel htmlFor="name-input">Write your username</InputLabel>
           <Input 
             id="name-input" 
             name="name" 

@@ -7,8 +7,11 @@ class User < ApplicationRecord
   has_many :posts
   has_many :collections
   has_many :bookmarks
-  
-  validates :name, presence: true
+
+  validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :picture, presence: false
+  validates :bio, presence: false
 end

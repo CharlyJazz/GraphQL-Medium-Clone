@@ -79,7 +79,9 @@ topics.each { |k,v|
 
 user_list.each do |name| 
   User.create(
-    name: name,
+    username: name,
+    last_name: 'First',
+    first_name: 'Last',
     email: "#{name.downcase}@gmail.com",
     password: "1234",
     bio: "Cool Bio by: #{name.downcase}")

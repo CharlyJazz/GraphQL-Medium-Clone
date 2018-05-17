@@ -3,9 +3,11 @@ Types::UserType = GraphQL::ObjectType.define do
   description 'User of the appication'
 
   field :id, !types.ID
-  field :name, !types.String
+  field :username, !types.String
   field :email, !types.String
-  field :bio, !types.String
+  field :last_name, !types.String
+  field :first_name, !types.String
+  field :bio, types.String
   field :picture, types.String
 
   field :claps, types[Types::ClapType] do

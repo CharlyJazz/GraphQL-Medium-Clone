@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import LoginForm from '../../components/Forms/Authentication/LoginForm'
 import { checkValidity } from '../../shared/checkValidity'
 import { updateObject } from '../../shared/updateObject'
+import { graphql } from 'react-apollo'
 
 class LoginContainer extends React.Component {
   state = {
