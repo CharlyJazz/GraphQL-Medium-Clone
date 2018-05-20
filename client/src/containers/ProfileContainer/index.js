@@ -21,7 +21,7 @@ class ProfileContainer extends Component {
       divContent = (
         <React.Fragment>
           <ProfileHeader
-            userName={this.props.user.name}
+            userName={this.props.user.username}
             userBio={this.props.user.bio}/>
           <ProfileCounts
             posts={this.props.user.count.posts}
@@ -46,7 +46,7 @@ class ProfileContainer extends Component {
 export default graphql(query, {
   options: (ownProps) => ({
     variables: {
-      name: ownProps.match.params.name,
+      username: ownProps.match.params.name,
       quantity: 6
     }
   }),

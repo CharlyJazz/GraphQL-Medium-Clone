@@ -1,10 +1,9 @@
 import gql from "graphql-tag"
 
-// Search user data
 export default gql`
-  query($name: String!, $quantity: Int!) {
-    searchUser(name: $name) {
-    name
+  query($username: String!, $quantity: Int!) {
+    searchUser(username: $username) {
+    username
     bio
     picture
     count(resources:[

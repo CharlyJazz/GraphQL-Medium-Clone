@@ -12,7 +12,23 @@
   width: 50%;
   transition: all 0.3s ease-out;
   animation: openModal 0.4s ease-out forwards;
-  margin-top: 2.5%;
+  margin-top: 5vh;
+  max-height: calc(100vh - 10vh);
+  overflow-y: auto;
+}
+
+@media(max-width: 919px) {
+    .ModalMotion {
+        left: 18%;
+        width: 65%;
+    }
+}
+
+@media(max-width: 480px) {
+    .ModalMotion {
+        left: 5%;
+        width: 90%;
+    }
 }
 
 .ModalMotionClosed {

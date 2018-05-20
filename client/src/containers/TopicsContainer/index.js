@@ -27,8 +27,7 @@ class TopicsContainer extends Component {
     let topicFiltered = null
 
     const { classes } = this.props
-
-
+    
     if (!this.props.data.loading) {
       topicFiltered = this.props.data.allTopics.find((n) => {
         return n['name'] === name

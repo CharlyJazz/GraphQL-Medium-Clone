@@ -36,17 +36,49 @@ const SignUpForm = ({
         <AccountBoxIcon className={classes.icon}/>
 
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-input">Write your username</InputLabel>
+          <InputLabel htmlFor="username-input">Write your username</InputLabel>
           <Input 
-            id="name-input" 
-            name="name" 
+            id="username-input" 
+            name="username" 
             value={controls.username.value} 
             onChange={(event) => onChange(event, 'username')} 
             type="text"
           />
           {controls.username.errors.message && 
-            <FormHelperText id="name-input-text" style={{color: red[500]}}>
+            <FormHelperText id="username-input-text" style={{color: red[500]}}>
               {controls.username.errors.message}
+            </FormHelperText>
+          }
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="firstname-input">Write your first name</InputLabel>
+          <Input 
+            id="firstname-input" 
+            name="firstname" 
+            value={controls.first_name.value} 
+            onChange={(event) => onChange(event, 'first_name')} 
+            type="text"
+          />
+          {controls.first_name.errors.message && 
+            <FormHelperText id="firstname-input-text" style={{color: red[500]}}>
+              {controls.first_name.errors.message}
+            </FormHelperText>
+          }
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="firstname-input">Write your first name</InputLabel>
+          <Input 
+            id="lastname-input" 
+            name="lastname" 
+            value={controls.last_name.value} 
+            onChange={(event) => onChange(event, 'last_name')} 
+            type="text"
+          />
+          {controls.last_name.errors.message && 
+            <FormHelperText id="lastname-input-text" style={{color: red[500]}}>
+              {controls.last_name.errors.message}
             </FormHelperText>
           }
         </FormControl>

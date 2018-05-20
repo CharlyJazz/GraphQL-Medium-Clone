@@ -12,7 +12,7 @@ export default gql`
         body
         postedBy {
           id
-          name
+          username
           picture
         }
       }

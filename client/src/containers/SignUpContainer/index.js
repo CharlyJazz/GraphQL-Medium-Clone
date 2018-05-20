@@ -59,6 +59,30 @@ class SignUpContainer extends React.Component {
           message: null
         }
       },
+      first_name: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 1
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      last_name: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 1
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
       bio: {
         value: '',
         validation: {
@@ -118,12 +142,24 @@ class SignUpContainer extends React.Component {
 
     await this.props.createUser({
       variables: {
-        name: this.state.controls.username.value,
+        username: this.state.controls.username.value,
+        first_name: this.state.controls.first_name.value,
+        last_name: this.state.controls.last_name.value,
         email: this.state.controls.email.value,
         password: this.state.controls.password.value,
         bio: this.state.controls.bio.value
       }
+    }).then((response) => {
+      this.props.clickedSwitchForm()
+    }).catch((error) => {
+      let arrayErrors = null
+      if (error.graphQLErrors) {
+        arrayErrors = error.graphQLErrors.map((err) => error.message)
+      }
+      this.props.onModalClose()
+      console.log(arrayErrors) // TODO: Show error
     })
+    
   }
 
   /**
@@ -166,7 +202,8 @@ class SignUpContainer extends React.Component {
 }
 
 SignUpContainer.propTypes = {
-  clickedSwitchForm: PropTypes.func.isRequired
+  clickedSwitchForm: PropTypes.func.isRequired,
+  onModalClose: PropTypes.func.isRequired
 }
 
 export default graphql(mutation, {name: 'createUser'})(SignUpContainer)
