@@ -161,9 +161,11 @@ class Header extends Component {
             this.state.showSignInOrSignUp 
               ? <LoginContainer 
                   clickedSwitchForm={this.handleSwitchForm}
+                  onModalClose={this.handleModalClosed}
                 />
               : <SignUpContainer
                   clickedSwitchForm={this.handleSwitchForm}
+                  onModalClose={this.handleModalClosed}
                 />
           }
         </ModalMotion>

@@ -7,7 +7,7 @@ Types::QueryType = GraphQL::ObjectType.new.tap do |root_type|
 
     Util::FieldCreatorSearchRecord.new([
       [Post, Types::PostType],
-      [User, Types::UserType, {:name=>'String'}],
+      [User, Types::UserType, {:username=>'String'}],
       [Collection, Types::CollectionType],
       [Bookmark, Types::BookmarkType],
       [Comment, Types::CommentType],

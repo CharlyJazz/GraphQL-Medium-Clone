@@ -9,7 +9,6 @@ import { createEditorState } from 'medium-draft'
 import mediumDraftExporter from 'medium-draft/lib/exporter'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
-import Typography from 'material-ui/Typography/Typography'
 import mutation from './mutation'
 import { graphql } from 'react-apollo'
 

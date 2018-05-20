@@ -14,7 +14,10 @@ const stylesBase = theme => ({
   },
   cardContent: {
     width: '50%',
-    margin: '0 auto'
+    margin: '0 auto',
+    [theme.breakpoints.down(920)]: {
+      width: '70%'
+    }
   },
   icon: {
     verticalAlign: 'middle',

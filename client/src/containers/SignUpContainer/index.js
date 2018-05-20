@@ -1,37 +1,124 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SignUpForm from '../../components/Forms/Authentication/SignUpForm'
+import { checkValidity } from '../../shared/checkValidity'
+import { updateObject } from '../../shared/updateObject'
+import { graphql } from 'react-apollo'
+import mutation from './mutation'
 
 class SignUpContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      errors: {},
-      user: {
-        email: '',
-        name: '',
-        password: '',
-        passwordRepeat: '',
-        bio: '',
-        image: ''
+  state = {
+    showPassword: false,
+    controls: {
+      email: {
+        value: '',
+        validation: {
+          required: true,
+          isEmail: true,
+          minLength: 3
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
       },
-      showPassword: false
+      password: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 6
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      passwordRepeat: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 6
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      username: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 4
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      first_name: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 1
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      last_name: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 1
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      },
+      bio: {
+        value: '',
+        validation: {
+          required: true,
+          minLength: 1
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      }
     }
   }
 
   /**
-   * Change the user object.
+   * Validate a set input value in the state
    *
    * @param {object} event - the JavaScript event object
+   * @param {string} controlName - then name of the field to search in controls state e.g: email
    */
-  changeUser = (event) => {
-    const user = {...this.state.user}
-    user[event.target.name] = event.target.value
-
-    this.setState({
-      user
+  inputChangedHandler = ( event, controlName ) => {
+    const updatedControls = updateObject( this.state.controls, {
+        [controlName]: updateObject( this.state.controls[controlName], {
+            value: event.target.value,
+            valid: checkValidity( event.target.value, this.state.controls[controlName].validation )[0],
+            touched: true,
+            errors: {
+              message: checkValidity( event.target.value, this.state.controls[controlName].validation )[0]
+                ? null
+                : checkValidity( event.target.value, this.state.controls[controlName].validation )[1]
+            }
+        })
     })
+
+    this.setState( { controls: updatedControls } )
   }
 
   /**
@@ -50,38 +137,73 @@ class SignUpContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm(event) {
-    // prevent default action. in this case, action is the form submission event
+  processForm = async (event) => {
     event.preventDefault()
 
-    console.log('name:', this.state.user.name)
-    console.log('email:', this.state.user.email)
-    console.log('password:', this.state.user.password)
-    console.log('passwordRepeat:', this.state.user.passwordConfirmation)
-    console.log('bio:', this.state.user.bio)
-    console.log('image:', this.state.user.image)
+    await this.props.createUser({
+      variables: {
+        username: this.state.controls.username.value,
+        first_name: this.state.controls.first_name.value,
+        last_name: this.state.controls.last_name.value,
+        email: this.state.controls.email.value,
+        password: this.state.controls.password.value,
+        bio: this.state.controls.bio.value
+      }
+    }).then((response) => {
+      this.props.clickedSwitchForm()
+    }).catch((error) => {
+      let arrayErrors = null
+      if (error.graphQLErrors) {
+        arrayErrors = error.graphQLErrors.map((err) => error.message)
+      }
+      this.props.onModalClose()
+      console.log(arrayErrors) // TODO: Show error
+    })
+    
   }
 
   /**
    * Render the component.
    */
   render() {
+    const passwordNoMatch = this.state.controls.password.value !== this.state.controls.passwordRepeat.value
     return (
       <SignUpForm
         onSubmit={this.processForm}
-        onChange={this.changeUser}
-        errors={this.state.errors}
-        user={this.state.user}
+        onChange={this.inputChangedHandler}
+        controls={this.state.controls}
         showPassword={this.state.showPassword}
         clickedShowPasswordToggle={this.handleShowPasswordToggle}
         clickedSwitchForm={this.props.clickedSwitchForm}
+        passwordNoMatch={passwordNoMatch}
+        disabled={
+          (
+            this.state.controls.password.errors.message       ||
+            this.state.controls.passwordRepeat.errors.message ||
+            this.state.controls.email.errors.message          ||
+            this.state.controls.username.errors.message       ||
+            this.state.controls.bio.errors.message            
+          )
+            ? true
+            : (
+                this.state.controls.password.value.length === 0       ||
+                this.state.controls.passwordRepeat.value.length === 0 ||
+                this.state.controls.email.value.length === 0          ||
+                this.state.controls.username.value.length === 0       ||
+                this.state.controls.bio.value.length === 0            ||
+                passwordNoMatch
+              )
+              ? true
+              : false
+        }
       />
     )
   }
 }
 
 SignUpContainer.propTypes = {
-  clickedSwitchForm: PropTypes.func.isRequired
+  clickedSwitchForm: PropTypes.func.isRequired,
+  onModalClose: PropTypes.func.isRequired
 }
 
-export default SignUpContainer
+export default graphql(mutation, {name: 'createUser'})(SignUpContainer)

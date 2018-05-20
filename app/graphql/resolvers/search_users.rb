@@ -12,7 +12,7 @@ class Resolvers::SearchUsers
       name 'UserFilter'
 
       argument :OR, -> { types[UserFilter] }
-      argument :name_contains, types.String
+      argument :username_contains, types.String
     end
     # when "filter" is passed "apply_filter" would be called to narrow the scope
     option :filter, type: UserFilter, with: :apply_filter
@@ -26,7 +26,7 @@ class Resolvers::SearchUsers
     def normalize_filters(value, branches = [])
       # add like SQL conditions
       scope = User.all
-      scope = scope.where('name LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
+      scope = scope.where('username LIKE ?', "%#{value['username_contains']}%") if value['username_contains']
   
       branches << scope
   
