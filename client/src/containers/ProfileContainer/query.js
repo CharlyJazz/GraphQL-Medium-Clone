@@ -6,6 +6,8 @@ export default gql`
     username
     bio
     picture
+    last_name
+    first_name
     count(resources:[
       "posts",
       "comments"

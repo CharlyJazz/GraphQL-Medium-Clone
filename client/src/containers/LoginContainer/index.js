@@ -4,12 +4,14 @@ import LoginForm from '../../components/Forms/Authentication/LoginForm'
 import { checkValidity } from '../../shared/checkValidity'
 import { updateObject } from '../../shared/updateObject'
 import { graphql } from 'react-apollo'
+import mutation from './mutation'
+import setCurrentUser from '../../shared/setCurrentUser'
 
 class LoginContainer extends React.Component {
   state = {
     controls: {
         email: {
-            value: '',
+            value: 'sfsfgfaf@dsfas.com', // TODO: TEMPORAL VALOR
             validation: {
                 required: true,
                 isEmail: true,
@@ -22,7 +24,7 @@ class LoginContainer extends React.Component {
             }
         },
         password: {
-            value: '',
+            value: '3214132421', // TODO: TEMPORAL VALOR
             validation: {
                 required: true,
                 minLength: 6
@@ -64,9 +66,30 @@ class LoginContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm = (event) => {
+  processForm = async (event) => {
     event.preventDefault()
 
+    await this.props.signInUser({
+      variables: {
+        email: this.state.controls.email.value,
+        password: this.state.controls.password.value
+      }
+    }).then((response) => {
+      console.log('[Login Success]', response)
+      // Save User Data and Token in the Local Storage
+      setCurrentUser({
+        token: response.data.signInUser.token,
+        id: response.data.signInUser.user.id,
+        username: response.data.signInUser.user.username,
+        picture: response.data.signInUser.user.picture 
+      })
+    }).catch((error) => {
+      let arrayErrors = null
+      if (error.graphQLErrors) {
+        arrayErrors = error.graphQLErrors.map((err) => error.message)
+      }
+      console.log(arrayErrors) // TODO: Show error
+    })
   }
 
   /**
@@ -95,4 +118,4 @@ LoginContainer.propTypes = {
   clickedSwitchForm: PropTypes.func.isRequired
 }
 
-export default LoginContainer
+export default graphql(mutation, {name: 'signInUser'})(LoginContainer)
