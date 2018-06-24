@@ -7,7 +7,6 @@ import Divider from 'material-ui/Divider/Divider'
 import { graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { CircularProgress, withStyles, Slide, Zoom } from 'material-ui'
-import Color from 'color'
 import query from './query'
 
 const styles = theme => ({
@@ -34,7 +33,6 @@ class ProfileContainer extends Component {
     }
     
     else {
-      console.log(this.props.user)
       divContent = (
         <Zoom in={true} style={{ transitionDelay: 500}}>
           <div>

@@ -7,7 +7,7 @@ import { graphql, compose } from 'react-apollo'
 import { SET_CURRENT_USER } from '../../apollo/clientMutations'
 import LOGIN_USER from './mutation'
 import setCurrentUserLocalStorage from '../../shared/setCurrentUser'
-import { Grow, Zoom, Typography } from 'material-ui'
+import { Grow, Typography } from 'material-ui'
 
 class LoginContainer extends React.Component {
   state = {
@@ -137,11 +137,6 @@ class LoginContainer extends React.Component {
                   : false
           }
           />
-        </Grow>
-        <Grow in={this.state.success}>
-          <Typography align="center">
-            Hello! {this.state.username}
-          </Typography>
         </Grow>
       </React.Fragment>
     )

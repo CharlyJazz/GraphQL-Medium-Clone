@@ -6,11 +6,18 @@ import ProfileContainer from '../containers/ProfileContainer'
 import CollectionsContainer from '../containers/CollectionsContainer'
 import TopicsContainer from '../containers/TopicsContainer'
 import NewPostContainer from '../containers/NewPostContainer'
+import LogoutContainer from '../containers/LogoutContainer'
 
 const routes = [
   {
     path: '/',
     component: HomeContainer,
+    exact: true,
+    private: false
+  },
+  {
+    path: '/logout',
+    component: LogoutContainer,
     exact: true,
     private: false
   },

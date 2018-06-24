@@ -14,20 +14,24 @@ import { withRouter } from 'react-router-dom'
 import ModalMotion from '../../ModalMotion/ModalMotion'
 import LoginContainer from '../../../containers/LoginContainer'
 import SignUpContainer from '../../../containers/SignUpContainer'
-import { graphql } from 'react-apollo'
-import { GET_CURRENT_USER } from '../../../apollo/clientQueries'
+import { Divider } from 'material-ui'
+import Anchor from '../../UI/Anchor/Anchor'
+
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
-  brand: {
+  brandBlock: {
     flex: 1,
-    cursor: 'pointer'
+  },
+  brand: {
+    cursor: 'pointer',
+    display: 'inline'
   },
   button: {
     margin: theme.spacing.unit,
-  },
+  }
 })
 
 class Header extends Component {
@@ -35,7 +39,8 @@ class Header extends Component {
     showSearchInput: false,
     anchorEl: null,
     modalIsOpen: false,
-    showSignInOrSignUp: true
+    showSignInOrSignUp: true,
+    logoutBegin: false
   }
 
   handleToggleSearch = () => {
@@ -56,6 +61,13 @@ class Header extends Component {
 
   handleClickBrand = () => {
     this.props.history.push('/')
+  }
+
+  handleLogout = () => {
+    this.setState({
+      anchorEl: null,
+      logoutBegin: true
+    }, () => this.props.history.push(`/logout`))
   }
 
   handleSwitchForm = () => {
@@ -82,30 +94,43 @@ class Header extends Component {
     this.setState({ modalIsOpen: false })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser && nextProps.currentUser.token !== this.props.currentUser.token) {
+      this.setState({logoutBegin: false})
+    }
+  }
+
   render () {
-    const { classes } = this.props
+    const { 
+      classes,
+      currentUser,
+      loading 
+    } = this.props
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
 
     let isAuth = false
 
-    if (!this.props.loading &&
-        this.props.user &&
-        this.props.user.token &&
-        this.props.user.username &&
-        this.props.user.id) {
+    if (!loading &&
+        currentUser &&
+        currentUser.token &&
+        currentUser.username &&
+        currentUser.id) {
       isAuth = true
     }
-
-    console.log(this.props)
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default" className="DontUseShadow">
           <Toolbar>
-            <Typography type="title" color="inherit" className={classes.brand} onClick={this.handleClickBrand}>
-              AppStories
-            </Typography>
+            <div className={classes.brandBlock}>
+              <Typography
+                onClick={this.handleClickBrand}
+                className={classes.brand}
+              >
+                AppStories
+              </Typography>
+            </div>
             {this.state.showSearchInput && <InputSearch />}
             <IconButton
               onClick={this.handleToggleSearch}
@@ -138,10 +163,33 @@ class Header extends Component {
                     open={open}
                     onClose={this.handleUserMenuClose}
                   >
-                    <MenuItem onClick={this.handleUserMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Posts</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Collections</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Logout</MenuItem>
+                    <MenuItem>
+                      <Anchor href={`/profile/${this.props.currentUser.username}`}>
+                        Profile
+                      </Anchor>
+                    </MenuItem>
+                    <MenuItem>
+                      <Anchor href={'/write/post/'}>
+                        New Stories
+                      </Anchor>
+                    </MenuItem>
+                    <MenuItem>
+                      <Anchor href={'/me/posts/'}>
+                        My Stories
+                      </Anchor>
+                    </MenuItem>
+                    <MenuItem>
+                      <Anchor href={'/me/collections'}>
+                        My Collections
+                      </Anchor>
+                    </MenuItem>
+                    <MenuItem>
+                      <Anchor href={'/me/bookmarks'}>
+                        My Bookmarks
+                      </Anchor>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem onClick={this.handleLogout} disabled={this.state.logoutBegin}>Logout</MenuItem>
                   </Menu>
                 </div>
               )
@@ -189,14 +237,7 @@ class Header extends Component {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object
 }
 
-export default graphql(GET_CURRENT_USER, {
-  props: ({data: { loading, currentUser, refetch } }) => ({
-    loading: loading,
-    user: currentUser,
-    refetch: refetch,
-  })
-})(
-  withRouter(withStyles(styles)(Header))
-)
+export default withRouter(withStyles(styles)(Header))
