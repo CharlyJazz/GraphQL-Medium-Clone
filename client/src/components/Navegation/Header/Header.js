@@ -14,6 +14,8 @@ import { withRouter } from 'react-router-dom'
 import ModalMotion from '../../ModalMotion/ModalMotion'
 import LoginContainer from '../../../containers/LoginContainer'
 import SignUpContainer from '../../../containers/SignUpContainer'
+import { graphql } from 'react-apollo'
+import { GET_CURRENT_USER } from '../../../apollo/clientQueries'
 
 const styles = theme => ({
   root: {
@@ -32,7 +34,6 @@ class Header extends Component {
   state = {
     showSearchInput: false,
     anchorEl: null,
-    isAuth: false,
     modalIsOpen: false,
     showSignInOrSignUp: true
   }
@@ -83,8 +84,20 @@ class Header extends Component {
 
   render () {
     const { classes } = this.props
-    const { isAuth, anchorEl } = this.state
+    const { anchorEl } = this.state
     const open = Boolean(anchorEl)
+
+    let isAuth = false
+
+    if (!this.props.loading &&
+        this.props.user &&
+        this.props.user.token &&
+        this.props.user.username &&
+        this.props.user.id) {
+      isAuth = true
+    }
+
+    console.log(this.props)
 
     return (
       <div className={classes.root}>
@@ -178,4 +191,12 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withRouter(withStyles(styles)(Header))
+export default graphql(GET_CURRENT_USER, {
+  props: ({data: { loading, currentUser, refetch } }) => ({
+    loading: loading,
+    user: currentUser,
+    refetch: refetch,
+  })
+})(
+  withRouter(withStyles(styles)(Header))
+)

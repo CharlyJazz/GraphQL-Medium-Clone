@@ -3,12 +3,16 @@ import PropTypes from 'prop-types'
 import LoginForm from '../../components/Forms/Authentication/LoginForm'
 import { checkValidity } from '../../shared/checkValidity'
 import { updateObject } from '../../shared/updateObject'
-import { graphql } from 'react-apollo'
-import mutation from './mutation'
-import setCurrentUser from '../../shared/setCurrentUser'
+import { graphql, compose } from 'react-apollo'
+import { SET_CURRENT_USER } from '../../apollo/clientMutations'
+import LOGIN_USER from './mutation'
+import setCurrentUserLocalStorage from '../../shared/setCurrentUser'
+import { Grow, Zoom, Typography } from 'material-ui'
 
 class LoginContainer extends React.Component {
   state = {
+    loading: false,
+    success: false,
     controls: {
         email: {
             value: 'sfsfgfaf@dsfas.com', // TODO: TEMPORAL VALOR
@@ -66,29 +70,48 @@ class LoginContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm = async (event) => {
+  processForm = (event) => {
     event.preventDefault()
-
-    await this.props.signInUser({
-      variables: {
-        email: this.state.controls.email.value,
-        password: this.state.controls.password.value
-      }
-    }).then((response) => {
-      console.log('[Login Success]', response)
-      // Save User Data and Token in the Local Storage
-      setCurrentUser({
-        token: response.data.signInUser.token,
-        id: response.data.signInUser.user.id,
-        username: response.data.signInUser.user.username,
-        picture: response.data.signInUser.user.picture 
+    this.setState({
+      loading: true
+    }, async () => {
+      await this.props.signInUser({
+        variables: {
+          email: this.state.controls.email.value,
+          password: this.state.controls.password.value
+        }
+      }).then((response) => {
+        console.log('[Login Success]', response)
+        // Save User Data and Token in the Local Storage
+        const currentUserObject = {
+          id: response.data.signInUser.user.id,
+          token: response.data.signInUser.token,
+          username: response.data.signInUser.user.username,
+          picture: response.data.signInUser.user.picture 
+        }
+        // Save Current User in the local storage
+        setCurrentUserLocalStorage(currentUserObject)
+        // Show success message
+        this.setState({
+          success: true,
+          username: response.data.signInUser.user.username
+        })
+        // Set Current User data in the Apollo Cache
+        this.props.setCurrentUser({
+          variables: currentUserObject
+        })
+        // Close modal
+        setTimeout(() => {
+          this.props.onModalClose()
+        }, 500);
+      }).catch((error) => {
+        console.log(error)
+        let arrayErrors = null
+        if (error.graphQLErrors) {
+          arrayErrors = error.graphQLErrors.map((err) => error.message)
+        }
+        console.log(arrayErrors) // TODO: Show error
       })
-    }).catch((error) => {
-      let arrayErrors = null
-      if (error.graphQLErrors) {
-        arrayErrors = error.graphQLErrors.map((err) => error.message)
-      }
-      console.log(arrayErrors) // TODO: Show error
     })
   }
 
@@ -97,25 +120,46 @@ class LoginContainer extends React.Component {
    */
   render() {
     return (
-      <LoginForm
-        onSubmit={this.processForm}
-        onChange={this.inputChangedHandler}
-        controls={this.state.controls}
-        clickedSwitchForm={this.props.clickedSwitchForm}
-        disabled={
-          (this.state.controls.password.errors.message || this.state.controls.email.errors.message)
-            ? true
-            : (this.state.controls.password.value.length === 0 || this.state.controls.email.value.length === 0)
+      <React.Fragment>
+        <Grow in={!this.state.success}>
+          <LoginForm
+          onSubmit={this.processForm}
+          onChange={this.inputChangedHandler}
+          controls={this.state.controls}
+          clickedSwitchForm={this.props.clickedSwitchForm}
+          disabled={
+            (this.state.controls.password.errors.message || this.state.controls.email.errors.message)
               ? true
-              : false
-        }
-      />
+              : (this.state.controls.password.value.length === 0 || this.state.controls.email.value.length === 0)
+                ? true
+                : this.state.loading
+                  ? true
+                  : false
+          }
+          />
+        </Grow>
+        <Grow in={this.state.success}>
+          <Typography align="center">
+            Hello! {this.state.username}
+          </Typography>
+        </Grow>
+      </React.Fragment>
     )
   }
 }
 
 LoginContainer.propTypes = {
-  clickedSwitchForm: PropTypes.func.isRequired
+  clickedSwitchForm: PropTypes.func.isRequired,
+  onModalClose: PropTypes.func.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+  signInUser: PropTypes.func.isRequired
 }
 
-export default graphql(mutation, {name: 'signInUser'})(LoginContainer)
+export default compose(
+  graphql(SET_CURRENT_USER, {
+    name : 'setCurrentUser'
+  }),
+  graphql(LOGIN_USER, {
+    name: 'signInUser'
+  })
+)(LoginContainer)
