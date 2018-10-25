@@ -69,7 +69,7 @@ PostPreviewPaper.defaultProps = {
 PostPreviewPaper.propTypes = {
   textAlign: PropTypes.string,
   textFrom: PropTypes.string,
-  postedBy: PropTypes.string.isRequired,
+  postedBy: PropTypes.object.isRequired,
   avatarObject: PropTypes.object,
   title: PropTypes.string.isRequired,
   postId: PropTypes.string.isRequired

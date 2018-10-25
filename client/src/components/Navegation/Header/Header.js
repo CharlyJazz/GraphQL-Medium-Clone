@@ -14,27 +14,33 @@ import { withRouter } from 'react-router-dom'
 import ModalMotion from '../../ModalMotion/ModalMotion'
 import LoginContainer from '../../../containers/LoginContainer'
 import SignUpContainer from '../../../containers/SignUpContainer'
+import { Divider } from 'material-ui'
+import Anchor from '../../UI/Anchor/Anchor'
+
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
-  brand: {
+  brandBlock: {
     flex: 1,
-    cursor: 'pointer'
+  },
+  brand: {
+    cursor: 'pointer',
+    display: 'inline'
   },
   button: {
     margin: theme.spacing.unit,
-  },
+  }
 })
 
 class Header extends Component {
   state = {
     showSearchInput: false,
     anchorEl: null,
-    isAuth: false,
     modalIsOpen: false,
-    showSignInOrSignUp: true
+    showSignInOrSignUp: true,
+    logoutBegin: false
   }
 
   handleToggleSearch = () => {
@@ -57,6 +63,13 @@ class Header extends Component {
     this.props.history.push('/')
   }
 
+  handleLogout = () => {
+    this.setState({
+      anchorEl: null,
+      logoutBegin: true
+    }, () => this.props.history.push(`/logout`))
+  }
+
   handleSwitchForm = () => {
     this.setState((prevState) => {
       return {
@@ -72,8 +85,8 @@ class Header extends Component {
     * SignUp -> false
     */
     this.setState({
-       modalIsOpen: true ,
-       showSignInOrSignUp: showSignInOrSignUp
+      modalIsOpen: true,
+      showSignInOrSignUp: showSignInOrSignUp
     })
   }
 
@@ -81,18 +94,43 @@ class Header extends Component {
     this.setState({ modalIsOpen: false })
   }
 
-  render () {
-    const { classes } = this.props
-    const { isAuth, anchorEl } = this.state
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser && nextProps.currentUser.token !== this.props.currentUser.token) {
+      this.setState({ logoutBegin: false })
+    }
+  }
+
+  render() {
+    const {
+      classes,
+      currentUser,
+      loading
+    } = this.props
+    const { anchorEl } = this.state
     const open = Boolean(anchorEl)
+
+    let isAuth = false
+
+    if (!loading &&
+      currentUser &&
+      currentUser.token &&
+      currentUser.username &&
+      currentUser.id) {
+      isAuth = true
+    }
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default" className="DontUseShadow">
           <Toolbar>
-            <Typography type="title" color="inherit" className={classes.brand} onClick={this.handleClickBrand}>
-              AppStories
-            </Typography>
+            <div className={classes.brandBlock}>
+              <Typography
+                onClick={this.handleClickBrand}
+                className={classes.brand}
+              >
+                AppStories
+              </Typography>
+            </div>
             {this.state.showSearchInput && <InputSearch />}
             <IconButton
               onClick={this.handleToggleSearch}
@@ -100,56 +138,79 @@ class Header extends Component {
               <Search />
             </IconButton>
             {
-              isAuth ? 
+              isAuth ?
                 (
-                <div>
-                  <IconButton
-                    aria-owns={open ? 'menu-appbar' : null}
-                    aria-haspopup="true"
-                    onClick={this.handleUserMenuOpen}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={open}
-                    onClose={this.handleUserMenuClose}
-                  >
-                    <MenuItem onClick={this.handleUserMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Posts</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Collections</MenuItem>
-                    <MenuItem onClick={this.handleUserMenuClose}>Logout</MenuItem>
-                  </Menu>
-                </div>
-              )
-              : 
-              (
-                <React.Fragment>
-                  <Button
-                    color="inherit" 
-                    className={classes.button}
-                    onClick={() => this.handleModalOpen(true)}>
-                    Sign In
+                  <div>
+                    <IconButton
+                      aria-owns={open ? 'menu-appbar' : null}
+                      aria-haspopup="true"
+                      onClick={this.handleUserMenuOpen}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={open}
+                      onClose={this.handleUserMenuClose}
+                    >
+                      <Anchor href={`/profile/${this.props.currentUser.username}`}>
+                        <MenuItem>
+                          Profile
+                      </MenuItem>
+                      </Anchor>
+                      <Anchor href={'/write/post/'}>
+                        <MenuItem>
+                          New Stories
+                      </MenuItem>
+                      </Anchor>
+                      <Anchor href={'/me/posts/'}>
+                        <MenuItem>
+                          My Stories
+                    </MenuItem>
+                      </Anchor>
+                      <Anchor href={'/me/collections'}>
+                        <MenuItem>
+                          My Collections
+                      </MenuItem>
+                      </Anchor>
+                      <Anchor href={'/me/bookmarks'}>
+                        <MenuItem>
+                          My Bookmarks
+                      </MenuItem>
+                      </Anchor>
+                      <Divider />
+                      <MenuItem onClick={this.handleLogout} disabled={this.state.logoutBegin}>Logout</MenuItem>
+                    </Menu>
+                  </div>
+                )
+                :
+                (
+                  <React.Fragment>
+                    <Button
+                      color="inherit"
+                      className={classes.button}
+                      onClick={() => this.handleModalOpen(true)}>
+                      Sign In
                   </Button>
-                  <Button
-                    raised
-                    color="primary" 
-                    className={classes.button}
-                    onClick={() => this.handleModalOpen(false)}>
-                    Get started
+                    <Button
+                      raised
+                      color="primary"
+                      className={classes.button}
+                      onClick={() => this.handleModalOpen(false)}>
+                      Get started
                   </Button>
-                </React.Fragment>
-              )
+                  </React.Fragment>
+                )
             }
           </Toolbar>
         </AppBar>
@@ -158,15 +219,15 @@ class Header extends Component {
           show={this.state.modalIsOpen}
           closed={this.handleModalClosed}>
           {
-            this.state.showSignInOrSignUp 
-              ? <LoginContainer 
-                  clickedSwitchForm={this.handleSwitchForm}
-                  onModalClose={this.handleModalClosed}
-                />
+            this.state.showSignInOrSignUp
+              ? <LoginContainer
+                clickedSwitchForm={this.handleSwitchForm}
+                onModalClose={this.handleModalClosed}
+              />
               : <SignUpContainer
-                  clickedSwitchForm={this.handleSwitchForm}
-                  onModalClose={this.handleModalClosed}
-                />
+                clickedSwitchForm={this.handleSwitchForm}
+                onModalClose={this.handleModalClosed}
+              />
           }
         </ModalMotion>
       </div>
@@ -176,6 +237,7 @@ class Header extends Component {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object
 }
 
 export default withRouter(withStyles(styles)(Header))

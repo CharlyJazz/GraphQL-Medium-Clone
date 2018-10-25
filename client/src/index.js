@@ -4,14 +4,22 @@ import ReactDOM from 'react-dom';
 import App from './application';
 
 import { ApolloProvider } from 'react-apollo'
+
 import { ApolloClient } from 'apollo-client'
+
 import { HttpLink } from 'apollo-link-http'
+
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloLink, concat } from 'apollo-link';
 
-import { BrowserRouter } from 'react-router-dom';
+import { withClientState } from 'apollo-link-state'
 
-import registerServiceWorker from './registerServiceWorker';
+import { ApolloLink } from 'apollo-link'
+
+import { BrowserRouter } from 'react-router-dom'
+
+import registerServiceWorker from './registerServiceWorker'
+
+import initialState from './apollo/initialState'
 
 import './index.css'
 
@@ -29,11 +37,37 @@ const JWTMiddleware = new ApolloLink((operation, forward) => {
 
   return forward(operation)
 })
+// This is the same cache you pass into new ApolloClient
+const cache = new InMemoryCache()
+// Create state Link
+const stateLink = withClientState({
+  cache,
+  resolvers: {
+    Mutation: {
+      setCurrentUser: (_, { id, token, username, picture }, { cache }) => {
+        const data = {
+          currentUser: {
+            __typename: 'currentUser',
+            id: id,
+            token: token,
+            username: username,
+            picture: picture
+          }
+        };
+        cache.writeData({ data });
+        return null;
+      },
+    },
+  },
+  defaults: initialState
+})
+// 
+const httpLinkWithAuthToken = JWTMiddleware.concat(httpLink)
 // Now you instantiate ApolloClient by passing in the httpLink and a
 // new instance of an InMemoryCache.
 const client = new ApolloClient({
-  link: concat(JWTMiddleware, httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link: ApolloLink.from([stateLink, httpLinkWithAuthToken])
 })
 // Finally you render the root component of your React app.
 // The App is wrapped with the higher-order component ApolloProvider
@@ -41,7 +75,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <App client={client}/>
     </BrowserRouter>
   </ApolloProvider>
   , document.getElementById('root')

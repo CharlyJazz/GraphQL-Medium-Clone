@@ -203,7 +203,8 @@ class SignUpContainer extends React.Component {
 
 SignUpContainer.propTypes = {
   clickedSwitchForm: PropTypes.func.isRequired,
-  onModalClose: PropTypes.func.isRequired
+  onModalClose: PropTypes.func.isRequired,
+  createUser: PropTypes.func.isRequired
 }
 
 export default graphql(mutation, {name: 'createUser'})(SignUpContainer)

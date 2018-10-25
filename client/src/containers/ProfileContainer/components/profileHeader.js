@@ -27,7 +27,7 @@ const profileHeader = props => (
   <div className={props.classes.flex}>
     <div className={props.classes.userInfo}>
       <Typography type="title" gutterBottom>
-      { props.userName }
+      { `${props.userFirstname} ${props.userLastname}` }
       </Typography>
       <Typography type="subheading" gutterBottom>
         { props.userBio }
@@ -51,6 +51,8 @@ profileHeader.propTypes = {
   imgUrl: PropTypes.string,
   userBio: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
+  userFirstname: PropTypes.string.isRequired,
+  userLastname: PropTypes.string.isRequired
 }
 
 profileHeader.defaultProps = {

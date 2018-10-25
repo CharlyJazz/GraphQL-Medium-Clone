@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
 import Color from 'color'
+import { Link } from 'react-router-dom'
+
+const BetterLink = Radium(Link) // https://github.com/FormidableLabs/radium/tree/master/docs/faq#why-doesnt-radium-work-on-react-routers-link-or-react-bootstraps-button-or-someothercomponent
 
 const Anchor = props => {
   let styles = {
@@ -14,9 +17,7 @@ const Anchor = props => {
     }
   }
 
-  return (
-    <a style={[styles.base]} href={props.href}> {props.children} </a>
-  )
+  return <BetterLink style={[styles.base]} to={props.href}> {props.children} </BetterLink>
 }
 
 Anchor.defaultProps = {

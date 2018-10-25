@@ -15,7 +15,10 @@ const PostPreviewFooter = props => (
     </div>
     <div className='UserBox'>
       <Typography type="subheading" color="inherit">
-        <Anchor children={props.postedBy} kind="primary"/>
+        <Anchor 
+          children={props.postedBy.username} 
+          href={`/profile/${props.postedBy.username}`}
+        />
       </Typography>
     </div>
     <div className='BookmarkBox'>
