@@ -85,8 +85,8 @@ class Header extends Component {
     * SignUp -> false
     */
     this.setState({
-       modalIsOpen: true ,
-       showSignInOrSignUp: showSignInOrSignUp
+      modalIsOpen: true,
+      showSignInOrSignUp: showSignInOrSignUp
     })
   }
 
@@ -96,15 +96,15 @@ class Header extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && nextProps.currentUser.token !== this.props.currentUser.token) {
-      this.setState({logoutBegin: false})
+      this.setState({ logoutBegin: false })
     }
   }
 
-  render () {
-    const { 
+  render() {
+    const {
       classes,
       currentUser,
-      loading 
+      loading
     } = this.props
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
@@ -112,10 +112,10 @@ class Header extends Component {
     let isAuth = false
 
     if (!loading &&
-        currentUser &&
-        currentUser.token &&
-        currentUser.username &&
-        currentUser.id) {
+      currentUser &&
+      currentUser.token &&
+      currentUser.username &&
+      currentUser.id) {
       isAuth = true
     }
 
@@ -138,79 +138,79 @@ class Header extends Component {
               <Search />
             </IconButton>
             {
-              isAuth ? 
+              isAuth ?
                 (
-                <div>
-                  <IconButton
-                    aria-owns={open ? 'menu-appbar' : null}
-                    aria-haspopup="true"
-                    onClick={this.handleUserMenuOpen}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={open}
-                    onClose={this.handleUserMenuClose}
-                  >
-                    <MenuItem>
+                  <div>
+                    <IconButton
+                      aria-owns={open ? 'menu-appbar' : null}
+                      aria-haspopup="true"
+                      onClick={this.handleUserMenuOpen}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={open}
+                      onClose={this.handleUserMenuClose}
+                    >
                       <Anchor href={`/profile/${this.props.currentUser.username}`}>
-                        Profile
+                        <MenuItem>
+                          Profile
+                      </MenuItem>
                       </Anchor>
-                    </MenuItem>
-                    <MenuItem>
                       <Anchor href={'/write/post/'}>
-                        New Stories
+                        <MenuItem>
+                          New Stories
+                      </MenuItem>
                       </Anchor>
-                    </MenuItem>
-                    <MenuItem>
                       <Anchor href={'/me/posts/'}>
-                        My Stories
-                      </Anchor>
+                        <MenuItem>
+                          My Stories
                     </MenuItem>
-                    <MenuItem>
+                      </Anchor>
                       <Anchor href={'/me/collections'}>
-                        My Collections
+                        <MenuItem>
+                          My Collections
+                      </MenuItem>
                       </Anchor>
-                    </MenuItem>
-                    <MenuItem>
                       <Anchor href={'/me/bookmarks'}>
-                        My Bookmarks
+                        <MenuItem>
+                          My Bookmarks
+                      </MenuItem>
                       </Anchor>
-                    </MenuItem>
-                    <Divider/>
-                    <MenuItem onClick={this.handleLogout} disabled={this.state.logoutBegin}>Logout</MenuItem>
-                  </Menu>
-                </div>
-              )
-              : 
-              (
-                <React.Fragment>
-                  <Button
-                    color="inherit" 
-                    className={classes.button}
-                    onClick={() => this.handleModalOpen(true)}>
-                    Sign In
+                      <Divider />
+                      <MenuItem onClick={this.handleLogout} disabled={this.state.logoutBegin}>Logout</MenuItem>
+                    </Menu>
+                  </div>
+                )
+                :
+                (
+                  <React.Fragment>
+                    <Button
+                      color="inherit"
+                      className={classes.button}
+                      onClick={() => this.handleModalOpen(true)}>
+                      Sign In
                   </Button>
-                  <Button
-                    raised
-                    color="primary" 
-                    className={classes.button}
-                    onClick={() => this.handleModalOpen(false)}>
-                    Get started
+                    <Button
+                      raised
+                      color="primary"
+                      className={classes.button}
+                      onClick={() => this.handleModalOpen(false)}>
+                      Get started
                   </Button>
-                </React.Fragment>
-              )
+                  </React.Fragment>
+                )
             }
           </Toolbar>
         </AppBar>
@@ -219,15 +219,15 @@ class Header extends Component {
           show={this.state.modalIsOpen}
           closed={this.handleModalClosed}>
           {
-            this.state.showSignInOrSignUp 
-              ? <LoginContainer 
-                  clickedSwitchForm={this.handleSwitchForm}
-                  onModalClose={this.handleModalClosed}
-                />
+            this.state.showSignInOrSignUp
+              ? <LoginContainer
+                clickedSwitchForm={this.handleSwitchForm}
+                onModalClose={this.handleModalClosed}
+              />
               : <SignUpContainer
-                  clickedSwitchForm={this.handleSwitchForm}
-                  onModalClose={this.handleModalClosed}
-                />
+                clickedSwitchForm={this.handleSwitchForm}
+                onModalClose={this.handleModalClosed}
+              />
           }
         </ModalMotion>
       </div>

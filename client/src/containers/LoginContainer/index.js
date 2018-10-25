@@ -14,31 +14,31 @@ class LoginContainer extends React.Component {
     loading: false,
     success: false,
     controls: {
-        email: {
-            value: 'sfsfgfaf@dsfas.com', // TODO: TEMPORAL VALOR
-            validation: {
-                required: true,
-                isEmail: true,
-                minLength: 3
-            },
-            valid: false,
-            touched: false,
-            errors: {
-              message: null
-            }
+      email: {
+        value: 'carlosjazzc1@gmail.com',
+        validation: {
+          required: true,
+          isEmail: true,
+          minLength: 3
         },
-        password: {
-            value: '3214132421', // TODO: TEMPORAL VALOR
-            validation: {
-                required: true,
-                minLength: 6
-            },
-            valid: false,
-            touched: false,
-            errors: {
-              message: null
-            }
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
         }
+      },
+      password: {
+        value: '12341234', // TODO: TEMPORAL VALOR
+        validation: {
+          required: true,
+          minLength: 6
+        },
+        valid: false,
+        touched: false,
+        errors: {
+          message: null
+        }
+      }
     }
   }
 
@@ -48,21 +48,21 @@ class LoginContainer extends React.Component {
    * @param {object} event - the JavaScript event object
    * @param {string} controlName - then name of the field to search in controls state e.g: email
    */
-  inputChangedHandler = ( event, controlName ) => {
-    const updatedControls = updateObject( this.state.controls, {
-        [controlName]: updateObject( this.state.controls[controlName], {
-            value: event.target.value,
-            valid: checkValidity( event.target.value, this.state.controls[controlName].validation )[0],
-            touched: true,
-            errors: {
-              message: checkValidity( event.target.value, this.state.controls[controlName].validation )[0]
-                ? null
-                : checkValidity( event.target.value, this.state.controls[controlName].validation )[1]
-            }
-        })
+  inputChangedHandler = (event, controlName) => {
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName], {
+        value: event.target.value,
+        valid: checkValidity(event.target.value, this.state.controls[controlName].validation)[0],
+        touched: true,
+        errors: {
+          message: checkValidity(event.target.value, this.state.controls[controlName].validation)[0]
+            ? null
+            : checkValidity(event.target.value, this.state.controls[controlName].validation)[1]
+        }
+      })
     })
 
-    this.setState( { controls: updatedControls } )
+    this.setState({ controls: updatedControls })
   }
 
   /**
@@ -87,7 +87,7 @@ class LoginContainer extends React.Component {
           id: response.data.signInUser.user.id,
           token: response.data.signInUser.token,
           username: response.data.signInUser.user.username,
-          picture: response.data.signInUser.user.picture 
+          picture: response.data.signInUser.user.picture
         }
         // Save Current User in the local storage
         setCurrentUserLocalStorage(currentUserObject)
@@ -123,19 +123,19 @@ class LoginContainer extends React.Component {
       <React.Fragment>
         <Grow in={!this.state.success}>
           <LoginForm
-          onSubmit={this.processForm}
-          onChange={this.inputChangedHandler}
-          controls={this.state.controls}
-          clickedSwitchForm={this.props.clickedSwitchForm}
-          disabled={
-            (this.state.controls.password.errors.message || this.state.controls.email.errors.message)
-              ? true
-              : (this.state.controls.password.value.length === 0 || this.state.controls.email.value.length === 0)
+            onSubmit={this.processForm}
+            onChange={this.inputChangedHandler}
+            controls={this.state.controls}
+            clickedSwitchForm={this.props.clickedSwitchForm}
+            disabled={
+              (this.state.controls.password.errors.message || this.state.controls.email.errors.message)
                 ? true
-                : this.state.loading
+                : (this.state.controls.password.value.length === 0 || this.state.controls.email.value.length === 0)
                   ? true
-                  : false
-          }
+                  : this.state.loading
+                    ? true
+                    : false
+            }
           />
         </Grow>
       </React.Fragment>
@@ -152,7 +152,7 @@ LoginContainer.propTypes = {
 
 export default compose(
   graphql(SET_CURRENT_USER, {
-    name : 'setCurrentUser'
+    name: 'setCurrentUser'
   }),
   graphql(LOGIN_USER, {
     name: 'signInUser'
