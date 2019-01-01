@@ -21,8 +21,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 import initialState from './apollo/initialState'
 
-import './index.css'
-
 // Here you create the HttpLink that will connect your ApolloClient
 // instance with the GraphQL API; your GraphQL server will be running
 // on http://localhost:3000.
@@ -32,7 +30,7 @@ const JWTMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
       Authorization: localStorage.getItem('Authorization') || null,
-    } 
+    }
   })
 
   return forward(operation)
@@ -61,7 +59,7 @@ const stateLink = withClientState({
   },
   defaults: initialState
 })
-// 
+//
 const httpLinkWithAuthToken = JWTMiddleware.concat(httpLink)
 // Now you instantiate ApolloClient by passing in the httpLink and a
 // new instance of an InMemoryCache.
@@ -75,7 +73,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App client={client}/>
+      <App client={client} />
     </BrowserRouter>
   </ApolloProvider>
   , document.getElementById('root')
