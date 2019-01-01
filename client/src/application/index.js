@@ -23,8 +23,6 @@ class Application extends Component {
   }
 
   render() {
-    const { currentUser, loading } = this.props.getCurrentUser
-
     return null
   }
 }
