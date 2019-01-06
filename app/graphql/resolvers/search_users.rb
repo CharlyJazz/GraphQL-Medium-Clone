@@ -7,6 +7,8 @@ class Resolvers::SearchUsers
     scope { User.all }
     # return type
     type !types[Types::UserType]
+    # description
+    description "Search Engine for Users using OR"
     # inline input type definition for the advance filter
     UserFilter = GraphQL::InputObjectType.define do
       name 'UserFilter'
@@ -27,12 +29,12 @@ class Resolvers::SearchUsers
       # add like SQL conditions
       scope = User.all
       scope = scope.where('username LIKE ?', "%#{value['username_contains']}%") if value['username_contains']
-  
+
       branches << scope
-  
+
       # continue to normalize down
       value['OR'].reduce(branches) { |s, v| normalize_filters(v, s) } if value['OR'].present?
-  
+
       branches
     end
 end

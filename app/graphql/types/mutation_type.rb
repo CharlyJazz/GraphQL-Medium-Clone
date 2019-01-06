@@ -13,4 +13,10 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :deleteComment, function: Resolvers::DeleteComment.new
   field :deleteCollection, function: Resolvers::DeleteCollection.new
   field :deleteBookmark, function: Resolvers::DeleteBookmark.new
+  # fields for edit resources
+  field :editComment, function: Resolvers::EditComment.new
+  field :editPost, function: Resolvers::EditPost.new
+  field :editCollection, function: Resolvers::EditCollection.new
+  field :addOrRemovePostsToCollection, function: Resolvers::AddOrRemovePostsToCollections.new
+  field :addOrRemoveTagsToPost, function: Resolvers::AddOrRemoveTagsToPost.new
 end

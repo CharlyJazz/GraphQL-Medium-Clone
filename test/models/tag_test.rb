@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
-  setup do 
+  setup do
     @post = create(:post)
     @tags = [create(:tag), create(:tag), create(:tag), create(:tag)]
   end

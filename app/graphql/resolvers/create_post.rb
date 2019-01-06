@@ -7,6 +7,8 @@ class Resolvers::CreatePost < GraphQL::Function
 
   type Types::PostType
 
+  description "Create a Post"
+
   def call(_obj, args, ctx)
     # Raise an exception if no user is present
     if ctx[:current_user].blank?

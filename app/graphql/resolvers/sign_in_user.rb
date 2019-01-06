@@ -3,6 +3,8 @@ class Resolvers::SignInUser < GraphQL::Function
 
   type Types::SignInPayloadType
 
+  description "Authenticate a user using the email and password and get a token"
+
   def call(_obj, args, _ctx)
     input = args[:credentials]
 

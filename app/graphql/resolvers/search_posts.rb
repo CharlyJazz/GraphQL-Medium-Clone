@@ -7,6 +7,8 @@ class Resolvers::SearchPosts
     scope { Post.all }
     # return type
     type !types[Types::PostType]
+    # description
+    description "Search Engine for Posts using OR"
     # inline input type definition for the advance filter
     PostFilter = GraphQL::InputObjectType.define do
       name 'PostFilter'
@@ -29,12 +31,12 @@ class Resolvers::SearchPosts
       scope = Post.all
       scope = scope.where('title LIKE ?', "%#{value['title_contains']}%") if value['title_contains']
       scope = scope.where('body LIKE ?', "%#{value['body_contains']}%") if value['body_contains']
-  
+
       branches << scope
-  
+
       # continue to normalize down
       value['OR'].reduce(branches) { |s, v| normalize_filters(v, s) } if value['OR'].present?
-  
+
       branches
     end
 end

@@ -7,6 +7,8 @@ class Resolvers::SearchCollections
     scope { Collection.all }
     # return type
     type !types[Types::CollectionType]
+    # description
+    description "Search Engine for Colletions using OR"
     # inline input type definition for the advance filter
     CollectionFilter = GraphQL::InputObjectType.define do
       name 'CollectionFilter'
@@ -29,12 +31,12 @@ class Resolvers::SearchCollections
       scope = Post.all
       scope = scope.where('title LIKE ?', "%#{value['title_contains']}%") if value['title_contains']
       scope = scope.where('description LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
-  
+
       branches << scope
-  
+
       # continue to normalize down
       value['OR'].reduce(branches) { |s, v| normalize_filters(v, s) } if value['OR'].present?
-  
+
       branches
     end
 end

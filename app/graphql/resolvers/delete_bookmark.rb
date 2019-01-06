@@ -3,6 +3,8 @@ class Resolvers::DeleteBookmark < GraphQL::Function
 
   type Types::MessagePayloadType
 
+  description "Delete a Bookmark forever"
+
   def call(_obj, args, ctx)
     # Raise an exception if no user is present
     if ctx[:current_user].blank?
@@ -18,7 +20,7 @@ class Resolvers::DeleteBookmark < GraphQL::Function
     end
 
     OpenStruct.new(message: 'Bookmark successfully removed')
-    
+
   rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
   end

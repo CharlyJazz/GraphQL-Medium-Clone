@@ -3,6 +3,8 @@ class Resolvers::DeletePost < GraphQL::Function
 
   type Types::MessagePayloadType
 
+  description "Delete a Post forever"
+
   def call(_obj, args, ctx)
     # Raise an exception if no user is present
     if ctx[:current_user].blank?
@@ -18,7 +20,7 @@ class Resolvers::DeletePost < GraphQL::Function
     end
 
     OpenStruct.new(message: 'Post successfully removed')
-    
+
   rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
   end

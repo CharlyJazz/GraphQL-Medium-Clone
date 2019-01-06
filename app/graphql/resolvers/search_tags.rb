@@ -7,6 +7,8 @@ class Resolvers::SearchTags
     scope { Tag.all }
     # return type
     type !types[Types::TagType]
+    # description
+    description "Search Engine for Tags using OR"
     # inline input type definition for the advance filter
     TagFilter = GraphQL::InputObjectType.define do
       name 'TagFilter'
@@ -27,12 +29,12 @@ class Resolvers::SearchTags
       # add like SQL conditions
       scope = Tag.all
       scope = scope.where('name LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
-  
+
       branches << scope
-  
+
       # continue to normalize down
       value['OR'].reduce(branches) { |s, v| normalize_filters(v, s) } if value['OR'].present?
-  
+
       branches
     end
 end

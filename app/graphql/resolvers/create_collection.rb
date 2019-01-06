@@ -6,6 +6,8 @@ class Resolvers::CreateCollection < GraphQL::Function
 
   type Types::CollectionType
 
+  description "Create a collection to add posts to it"
+
   def call(_obj, args, ctx)
     # Raise an exception if no user is present
     if ctx[:current_user].blank?
@@ -30,6 +32,6 @@ class Resolvers::CreateCollection < GraphQL::Function
     collection
 
   rescue ActiveRecord::RecordInvalid => e
-      GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
+    GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
   end
 end

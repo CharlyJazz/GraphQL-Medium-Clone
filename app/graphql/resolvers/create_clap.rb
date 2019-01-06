@@ -1,8 +1,10 @@
 class Resolvers::CreateClap < GraphQL::Function
-  argument :postId, types.ID
+  argument :postId, !types.ID
   argument :totalClaps, types.Int
 
   type Types::ClapType
+
+  description "Add Claps to a Post"
 
   def call(_obj, args, ctx)
     # Raise an exception if no user is present
@@ -16,10 +18,10 @@ class Resolvers::CreateClap < GraphQL::Function
     rescue ActiveRecord::RecordNotFound => e
       return GraphQL::ExecutionError.new("Post with the id #{args[:postId]} not found")
     end
-    
+
     # Check if current_user have claps in the post
     clap = post.claps.where(:user_id => ctx[:current_user].id).first
-    
+
     if clap.blank?
       clap = Clap.new(
         user: ctx[:current_user],
@@ -33,7 +35,7 @@ class Resolvers::CreateClap < GraphQL::Function
     end
 
     clap
-    
+
   rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
   end
