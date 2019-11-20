@@ -5,6 +5,8 @@
 
 A project to learn a lot of tecnologies and build something awesome and great inspired on Medium.
 
+**You can use this API to create your own front end to study new frameworks of stacks.**
+
 ## Getting Started
 
 The easy way to start is to clone this repo, read the prerequisites and then get a Ruby package manager to install everything. We recommend rbenv or RVM to handler this task.
@@ -48,11 +50,18 @@ $ rails db:schema:load && rails db:seed
 
 ## Built With
 * Ruby on Rails - Web application framework base on Model-View-Controller (MVC) pattern.
-* React -  JavaScript library for building user interfaces
 * Graphql - Query language for APIs
-* Apollo - Get everything you need from Graphl.
+
+## You can build your own front end, some ideas:
+* React -  JavaScript library for building user interfaces
+* Apollo - Get everything you need from Graphql.
+* React Native - Cross platform mobile framework
+* Angular, Vanilla JS, Electroc, I dont know dude, wharever :) :star:
 
 ## Project Status
 
-Check the current status on our waffle boards [here](https://waffle.io/CharlyJazz/Rails-Graphql-React-Apollo)
+Backend ready to use, tested. But you can improve this, some ideas:
+
+* Cache Strategies
+* Send emails for events like register, recover password.
  
