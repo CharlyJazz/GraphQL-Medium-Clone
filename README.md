@@ -75,7 +75,9 @@ Check http://localhost:3000/graphiql
 - React - JavaScript library for building user interfaces
 - Apollo - Get everything you need from Graphql.
 - React Native - Cross platform mobile framework
-- Angular, Vanilla JS, Electroc, I dont know dude, wharever :) :star:
+- Angular
+- Svelte
+- Electron
 
 ## Project Status
 
