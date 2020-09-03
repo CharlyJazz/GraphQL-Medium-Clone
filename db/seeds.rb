@@ -1,6 +1,6 @@
 user_list = %w(Bart Kevin Max Rafael Charly Megan)
 
-posts_length = 80
+posts_length = 20
 
 collections_length = 4
 
@@ -66,7 +66,7 @@ topics = {
   :Media=>"Where the newsroom is the news",
 }
 
-topics.each { |k,v|  
+topics.each { |k,v|
   name = k.to_s.humanize(capitalize: false)
   description = v
 
@@ -77,7 +77,7 @@ topics.each { |k,v|
   )
 }
 
-user_list.each do |name| 
+user_list.each do |name|
   User.create(
     username: name,
     last_name: 'First',
@@ -89,33 +89,33 @@ end
 
 posts_length.times do |n|
   post = Post.create(
-    body: "Body #{n.to_s}",
+    body: BetterLorem.c(rand(300..800)),
     title: "Title #{n.to_s}",
     picture: "Image#{n.to_s}.png",
     user: User.find(rand(1..user_list.length)),
     topic: Topic.find(rand(1..topics.length))
   )
 
-  rand(1..tag_length).times do |n| 
+  rand(1..tag_length).times do |n|
     post.tags << Tag.find(n + 1)
   end
 
-  rand(1..user_list.length).times do |n| 
+  rand(1..user_list.length).times do |n|
     Comment.create(
-      body: "Body #{n.to_s}",
+      body: BetterLorem.c(rand(20..100)),
       user: User.find(n + 1),
-      post: post      
+      post: post
     )
   end
 
-  rand(1..user_list.length).times do |n| 
+  rand(1..user_list.length).times do |n|
     Bookmark.create(
       user: User.find(n + 1),
-      post: post      
+      post: post
     )
   end
 
-  rand(1..user_list.length).times do |n| 
+  rand(1..user_list.length).times do |n|
     post.claps << Clap.new(
       user: User.find(n + 1),
       total: rand(1..10)
@@ -125,13 +125,13 @@ end
 
 collections_length.times do |n|
   collection = Collection.create(
-    title: "Title #{n.to_s}",
-    description: "Description #{n.to_s}",
+    title: BetterLorem.c(rand(2..15)),
+    description: BetterLorem.c(rand(5..30)),
     picture: "Image#{n.to_s}.png",
     user: User.find(rand(1..user_list.length))
   )
 
-  rand(1..posts_length).times do |n| 
-    collection.posts << Post.find(n + 1)  
+  rand(1..posts_length).times do |n|
+    collection.posts << Post.find(n + 1)
   end
 end

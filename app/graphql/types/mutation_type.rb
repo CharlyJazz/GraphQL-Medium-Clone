@@ -19,4 +19,5 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :editCollection, function: Resolvers::EditCollection.new
   field :addOrRemovePostsToCollection, function: Resolvers::AddOrRemovePostsToCollections.new
   field :addOrRemoveTagsToPost, function: Resolvers::AddOrRemoveTagsToPost.new
+  field :updateToken, function: Resolvers::UpdateToken.new
 end
