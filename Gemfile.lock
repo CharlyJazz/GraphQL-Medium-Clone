@@ -40,10 +40,12 @@ GEM
       tzinfo (~> 1.1)
     arel (8.0.0)
     bcrypt (3.1.13)
+    betterlorem (0.1.2)
     builder (3.2.4)
     byebug (11.1.1)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    dotenv (2.7.6)
     erubi (1.9.0)
     factory_bot (5.1.1)
       activesupport (>= 4.2.0)
@@ -139,7 +141,9 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  betterlorem (~> 0.1.2)
   byebug
+  dotenv (~> 2.7)
   factory_bot_rails
   foreman (~> 0.82.0)
   graphiql-rails (= 1.4.8)
@@ -157,4 +161,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.16.6
+   2.1.4
