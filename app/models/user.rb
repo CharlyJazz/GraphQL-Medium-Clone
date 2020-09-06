@@ -27,7 +27,9 @@ class User < ApplicationRecord
 
   def reset_password!(password)
     self.token = nil
+    self.token_sent_at = nil
     self.password = password
+    self.password_confirmation = password
     save!
   end
 end
