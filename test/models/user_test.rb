@@ -11,7 +11,7 @@ class UserTest < ActiveSupport::TestCase
     clap_2 = Clap.new(total: 3, user: @user)
     clap_3 = Clap.new(total: 5, user: @user)
     clap_4 = Clap.new(total: 5, user: @user)
-    
+
     @post_1.claps << clap_1
     @post_1.claps << clap_2
     @post_1.claps << clap_3
@@ -19,5 +19,14 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal @user.claps_posts.count, 4
     assert_equal @user.claps_posts.sum(:total), 15
+  end
+
+  test 'Update password' do
+    new_password = '12345678'
+    @user.generate_token!
+    assert @user.is_token_valid?
+    assert @user.authenticate('[omitted]')
+    @user.reset_password! new_password
+    assert @user.authenticate(new_password)
   end
 end

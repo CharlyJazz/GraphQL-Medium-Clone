@@ -14,4 +14,22 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :picture, presence: false
   validates :bio, presence: false
+
+  def generate_token!
+    self.token = SecureRandom.hex(10)
+    self.token_sent_at = Time.now.utc
+    save!
+  end
+
+  def is_token_valid?
+    (self.token_sent_at + 1.hours) > Time.now.utc
+  end
+
+  def reset_password!(password)
+    self.token = nil
+    self.token_sent_at = nil
+    self.password = password
+    self.password_confirmation = password
+    save!
+  end
 end

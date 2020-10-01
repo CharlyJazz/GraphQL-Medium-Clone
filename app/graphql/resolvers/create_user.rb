@@ -11,7 +11,7 @@ class Resolvers::CreateUser < GraphQL::Function
   description "Create a User"
 
   def call(_obj, args, _ctx)
-    User.create!(
+    user = User.create!(
       username: args[:username],
       last_name: args[:last_name],
       first_name: args[:first_name],
@@ -21,6 +21,6 @@ class Resolvers::CreateUser < GraphQL::Function
       password: args[:credentials][:password]
     )
   rescue ActiveRecord::RecordInvalid => e
-    GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
+    GraphQL::ExecutionError.new("Invalid input:deliver_now #{e.record.errors.full_messages.join(', ')}")
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517191609) do
+ActiveRecord::Schema.define(version: 20200903001931) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 20180517191609) do
     t.string "bio"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "token_sent_at"
+    t.string "token"
   end
 
 end
