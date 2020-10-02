@@ -50,3 +50,5 @@ gem 'search_object_graphql', '0.1'
 gem "betterlorem", "~> 0.1.2"
 
 gem "dotenv", "~> 2.7"
+
+gem 'rack-cors'
