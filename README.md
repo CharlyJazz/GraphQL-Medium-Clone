@@ -53,13 +53,21 @@ $ bundle install
 $ rails db:schema:load && rails db:seed
 ```
 
-## Docker
+## Docker Compose
 
 Resource: https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose
 
 ```bash
 $ docker-compose up -d
 $ docker-compose exec app bundle exec rake db:setup db:migrate db:seed
+```
+
+
+## How to build the Dockerfile without Docker Compose
+
+```bash
+$ docker run --name database_for_ruby -e POSTGRES_DB=medium_graphql -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:9.4
+$ docker build . -t ruby && docker run --env-file ./.env -p 3000:3000 --link database_for_ruby ruby -t ruby_graphql_backend
 ```
 
 Check http://localhost:3000/graphiql

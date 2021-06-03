@@ -1,12 +1,12 @@
 user_list = %w(Bart Kevin Max Rafael Charly Megan)
 
-posts_length = 20
+posts_length = 2
 
 collections_length = 4
 
 tag_length = 0
 
-tag_file = YAML.load_file(Dir['tmp'][0] + '/tag.yml')
+tag_file = YAML.load_file(File.join(Rails.root, 'db', 'tag.yml'))
 
 tag_file['tags'].each do |tag|
   Tag.create(name: tag)
