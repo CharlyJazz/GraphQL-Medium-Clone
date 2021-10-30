@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    app: rails-graphql
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: rails-graphql
+  template:
+    metadata:
+      labels:
+        app: rails-graphql
+    spec:
+      containers:
+      - name: rails-graphql
+        image: localhost:5000/rubygraphql
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 3000
+      

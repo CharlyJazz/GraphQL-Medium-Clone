@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: rails-graphql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postgres-graphql
+  template:
+    metadata:
+      labels:
+        app: postgres-graphql
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.1
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: database_for_ruby
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: DATABASE_NAME
+              value: medium_graphql
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: "rails-graphql-pgdata"
+      volumes:
+        - hostPath:
+            path: "/home/docker/pgdata"
+          name: rails-graphql-pgdata
