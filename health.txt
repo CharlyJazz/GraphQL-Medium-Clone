@@ -1,0 +1,18 @@
+curl 'http://localhost:3000/graphql' \
+  -H 'Connection: keep-alive' \
+  -H 'sec-ch-ua: "Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"' \
+  -H 'Content-Type: application/json' \
+  -H 'X-CSRF-Token: gGpfeXVw2RfKtDIKRVkMbdESYs+/XoLG5O/0ydGnPvbd/GxiNFQdWH+O/hCNNkstgnK649e0lepcSvffZBmBrQ==' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'Accept: */*' \
+  -H 'Origin: http://localhost:3000' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: http://localhost:3000/graphiql' \
+  -H 'Accept-Language: es-419,es;q=0.9' \
+  -H 'Cookie: _xsrf=2|3928a4c2|089116104950fc30e8e099ad8fd44015|1633230098; username-localhost-8889="2|1:0|10:1633233631|23:username-localhost-8889|44:MWQyNzM5YzFmMmIyNDIxY2IyNjI1NTU4OTM4ODcxZGE=|3d175694814e90857135c715f6315abf497cd6a60f5dcfa5af208141ab126771"; username-localhost-8888="2|1:0|10:1633302588|23:username-localhost-8888|44:OWVhNWJhMjEyZGY2NDRlMWFiODdmYTIwYjhkZDY3ZGQ=|1c5b510d0c24dba48753fbfab061ad3625059c91486faf8c4389eb109cd5bd77"' \
+  --data-raw '{"query":"{ allUsers {\nid\n}}","variables":null,"operationName":null}' \
+  --compressed
